@@ -1,10 +1,16 @@
 import React from 'react'
-import RouterWrapper from './pages'
+import RouterWrapper from 'pages'
+import GlobalStyle from 'styles'
+import theme from 'styles/theme'
+import { ThemeProvider } from 'styled-components'
 
 const App: React.FC = () => {
   return (
     <>
-      <RouterWrapper />
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <RouterWrapper />
+      </ThemeProvider>
     </>
   )
 }
