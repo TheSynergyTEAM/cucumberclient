@@ -2,7 +2,7 @@ import React from 'react'
 import * as S from './style'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <S.StyledContainer>
       <S.Logo>오이마켓</S.Logo>
