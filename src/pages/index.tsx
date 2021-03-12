@@ -1,30 +1,32 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Header from '../components/Header'
-import styled from 'styled-components'
+import Header from 'components/Header'
+import Container from 'components/common/Container'
 
 const Main = React.lazy(() => import('pages/Main'))
 const Search = React.lazy(() => import('pages/Search'))
 const Detail = React.lazy(() => import('pages/Detail'))
+const Create = React.lazy(() => import('pages/Create'))
 
-const SwitchWrapper = styled.div`
-  position: relative;
-  top: 60px;
-`
+const ContainerStyle: React.CSSProperties = {
+  top: '80px',
+  position: 'relative'
+}
 
 const RouteWrapper: React.FC = () => {
   return (
     <Router>
       <Header />
-      <SwitchWrapper>
+      <Container rowProps={{ style: ContainerStyle }}>
         <Switch>
           <Suspense fallback={<div>Loading...</div>}>
             <Route path="/" exact component={Main} />
             <Route path="/search/:word" exact component={Search} />
+            <Route path="/article/create" exact component={Create} />
             <Route path="/articles/:id" exact component={Detail} />
           </Suspense>
         </Switch>
-      </SwitchWrapper>
+      </Container>
     </Router>
   )
 }

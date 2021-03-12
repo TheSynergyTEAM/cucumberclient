@@ -13,6 +13,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
-    'prettier/prettier': 0
+    'prettier/prettier': 0,
+    'react/prop-types': 'off'
   }
 };
