@@ -8,8 +8,6 @@ export const StyledContainer = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
-  justify-content: space-around;
-  align-items: center;
 `
 
 export const Logo = styled.div`
@@ -47,4 +45,13 @@ export const Menu = styled.ul`
   li {
     list-style: none;
   }
+`
+
+export const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
 `
