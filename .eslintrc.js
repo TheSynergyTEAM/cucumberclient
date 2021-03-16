@@ -16,4 +16,4 @@ module.exports = {
     'prettier/prettier': 0,
     'react/prop-types': 'off'
   }
-};
+}
