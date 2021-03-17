@@ -11,7 +11,9 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Roboto', sans-serif;
-    background-color:"#f2f7f3";
+    background-color: #f2f7f3;
+    overflow: hidden;
+    height: 100%;
   }
 
   a {
