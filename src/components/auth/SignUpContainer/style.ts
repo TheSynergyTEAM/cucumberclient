@@ -12,6 +12,15 @@ export const StyledContainer = styled.div`
 
 export const StyledTitle = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-weight: bold;
+  margin-bottom: ${({ theme }) => theme.margins.lg};
+`
+
+export const StyledTitlePrimaryColor = styled.span`
+  color: ${({ theme }) => theme.palette.green.main};
+`
+
+export const StyledDescription = styled.h5`
+  color: ${({ theme }) => theme.palette.grey[5]};
   margin-bottom: 3rem;
-  text-align: center;
 `

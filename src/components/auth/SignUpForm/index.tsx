@@ -1,11 +1,12 @@
 import React from 'react'
 import { Form, Input } from 'antd'
+import { StyledForm } from './style'
 
 const SignUpForm: React.FC = () => {
   const [form] = Form.useForm()
 
   return (
-    <Form layout="horizontal" form={form} labelCol={{ span: 3 }}>
+    <StyledForm layout="horizontal" form={form} labelCol={{ span: 3 }}>
       <Form.Item label="아이디" colon={false} required wrapperCol={{ span: 5 }}>
         <Input />
       </Form.Item>
@@ -25,7 +26,7 @@ const SignUpForm: React.FC = () => {
       >
         <Input type="password" />
       </Form.Item>
-    </Form>
+    </StyledForm>
   )
 }
 
