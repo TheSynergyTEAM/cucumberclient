@@ -6,12 +6,12 @@ export const StyledContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.palette.white.main};
   display: flex;
 `
 
 export const Logo = styled.div`
-  color: ${({ theme }) => theme.colors.green.main};
+  color: ${({ theme }) => theme.palette.green.main};
   font-size: ${({ theme }) => theme.fontSizes.logo};
   font-weight: 500;
   font-family: 'Recipekorea';
@@ -19,28 +19,28 @@ export const Logo = styled.div`
 
 export const InputBox = styled.div`
   width: 25vw;
-  border: 1px solid ${({ theme }) => theme.colors.grey.main};
+  border: 1px solid ${({ theme }) => theme.palette.grey.main};
   border-radius: 5px;
-  padding: ${({ theme }) => theme.paddings.base};
+  padding: ${({ theme }) => theme.paddings.md};
   display: flex;
   align-items: center;
   justify-content: space-between;
   input {
-    font-size: ${({ theme }) => theme.fontSizes.small};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
     width: 80%;
     font-weight: 600;
     &::placeholder {
-      color: ${({ theme }) => theme.colors.grey.main};
+      color: ${({ theme }) => theme.palette.grey.main};
     }
   }
   svg {
-    color: ${({ theme }) => theme.colors.grey[1]};
+    color: ${({ theme }) => theme.palette.grey[1]};
   }
 `
 
 export const Menu = styled.ul`
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  color: ${({ theme }) => theme.colors.green[1]};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.palette.green[1]};
   font-weight: 600;
   li {
     list-style: none;
