@@ -1,7 +1,8 @@
 import React from 'react'
+import { StyledContainer } from './style'
 
 const SignUpSide: React.FC = () => {
-  return <div>123</div>
+  return <StyledContainer>123</StyledContainer>
 }
 
 export default SignUpSide

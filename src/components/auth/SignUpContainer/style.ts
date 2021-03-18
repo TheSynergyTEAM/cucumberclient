@@ -22,5 +22,4 @@ export const StyledTitlePrimaryColor = styled.span`
 
 export const StyledDescription = styled.h5`
   color: ${({ theme }) => theme.palette.grey[5]};
-  margin-bottom: 3rem;
 `

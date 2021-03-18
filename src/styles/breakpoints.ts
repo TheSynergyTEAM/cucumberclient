@@ -11,6 +11,7 @@ const sizes = {
 const breakpoints = {
   mobile: `@media only screen and (min-width: ${sizes.mobile})`,
   mobileL: `@media only screen and (min-width: ${sizes.mobile}) and (max-width: ${sizes.mobileL})`,
+  onlyMobile: `@media only screen and (max-width: ${sizes.tabletL})`,
   tablet: `@media only screen and (min-width: ${sizes.tablet})`,
   tabletL: `@media only screen and (min-width: ${sizes.tablet}) and (max-width: ${sizes.tabletL})`,
   laptop: `@media only screen and (min-width: ${sizes.laptop})`,
