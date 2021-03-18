@@ -27,7 +27,7 @@ const SignUpForm: React.FC = () => {
         <Input type="password" placeholder="비밀번호" />
       </Form.Item>
       <Form.Item required>
-        <Input type="password" />
+        <Input type="password" placeholder="비밀번호 확인" />
       </Form.Item>
       <Form.Item>
         <Button type="primary" style={{ width: '100%' }}>
