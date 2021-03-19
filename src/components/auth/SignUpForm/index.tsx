@@ -11,15 +11,15 @@ const SignUpForm: React.FC = () => {
         required
         style={{
           display: 'inline-block',
-          marginRight: '1rem',
-          width: 'calc(50% - 0.5rem)'
+          marginRight: '12px',
+          width: 'calc(50% - 6px)'
         }}
       >
         <Input placeholder="아이디" />
       </Form.Item>
       <Form.Item
         required
-        style={{ display: 'inline-block', width: 'calc(50% - 0.5rem)' }}
+        style={{ display: 'inline-block', width: 'calc(50% - 6px)' }}
       >
         <Input placeholder="이메일" />
       </Form.Item>

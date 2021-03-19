@@ -14,4 +14,8 @@ export const StyledForm = styled(Form)`
     border-bottom: none;
     padding-right: ${({ theme }) => theme.paddings.xl};
   }
+
+  & .ant-form-item {
+    margin-bottom: 12px;
+  }
 `

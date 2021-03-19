@@ -22,7 +22,6 @@ export const StyledStepItem = styled.div`
   }
 
   &.left {
-    /* border-right: 1px solid #ccc; */
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
   }
