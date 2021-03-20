@@ -8,6 +8,7 @@ export const StyledContainer = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.palette.white.main};
   display: flex;
+  z-index: 1;
 `
 
 export const Logo = styled.div`
@@ -46,6 +47,7 @@ export const Menu = styled.ul`
   font-weight: 600;
   li {
     list-style: none;
+    cursor: pointer;
   }
 `
 

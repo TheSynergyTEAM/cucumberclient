@@ -15,6 +15,9 @@
   "white": {
     "main": "#ffffff"
   },
+  "black": {
+    "main": "#000000"
+  },
   "grey": {
     "0": "#ededed",
     "1": "#dddddd",
@@ -22,6 +25,7 @@
     "3": "#bfbfbf",
     "4": "#b1b1b1",
     "5": "#a5a5a5",
+    "6": "#666666",
     "main": "#cdcdcd"
   }
 }

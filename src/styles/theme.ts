@@ -20,6 +20,7 @@ export interface Colors {
   green: Color
   grey: Color
   white: Color
+  black: Color
 }
 
 export interface Units {
