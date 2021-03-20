@@ -8,6 +8,7 @@ export const StyledContainer = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.palette.white.main};
   display: flex;
+  z-index: 1;
 `
 
 export const Logo = styled.div`

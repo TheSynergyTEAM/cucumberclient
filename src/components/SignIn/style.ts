@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import bp from 'styles/breakpoints'
 
 export const ModalOverlay = styled.div`
@@ -8,6 +9,7 @@ export const ModalOverlay = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
 `
 
 export const ModalContainer = styled.div`
@@ -15,6 +17,7 @@ export const ModalContainer = styled.div`
   background-color: white;
   margin: 70px auto;
   border-radius: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
 `
 
 export const ModalNav = styled.div`
@@ -25,7 +28,6 @@ export const ModalNav = styled.div`
 export const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: 'Noto Sans KR', sans-serif;
   align-items: center;
 `
 
