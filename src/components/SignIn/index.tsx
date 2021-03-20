@@ -2,7 +2,16 @@ import React from 'react'
 
 import Container from 'components/common/Container'
 import { Link } from 'react-router-dom'
-import * as S from './style'
+import {
+  ModalOverlay,
+  ModalContainer,
+  ModalNav,
+  StyledForm,
+  Title,
+  SubText,
+  DivideLine,
+  SignUpLink
+} from './style'
 import { Form, Input, Button } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
 
@@ -26,23 +35,23 @@ const SignIn: React.FC<SignInProps> = ({ handleModal }) => {
   }
 
   return (
-    <S.ModalOverlay>
+    <ModalOverlay>
       <Container>
-        <S.ModalContainer>
-          <S.ModalNav>
+        <ModalContainer>
+          <ModalNav>
             <Button onClick={handleModal}>
               <CloseOutlined />
             </Button>
-          </S.ModalNav>
-          <S.StyledForm>
-            <S.Title>시작하기</S.Title>
-            <S.SubText>
+          </ModalNav>
+          <StyledForm>
+            <Title>시작하기</Title>
+            <SubText>
               지금 로그인하고 오이마켓을 경험해보세요.
               <br />
               중고 거래부터 동네 정보까지,
               <br /> 이웃과 함께 해요.
-            </S.SubText>
-            <S.DivideLine />
+            </SubText>
+            <DivideLine />
             <Form
               {...layout}
               name="basic"
@@ -63,16 +72,16 @@ const SignIn: React.FC<SignInProps> = ({ handleModal }) => {
                 </Button>
               </Form.Item>
             </Form>
-          </S.StyledForm>
-          <S.SignUpLink>
+          </StyledForm>
+          <SignUpLink>
             계정이 없으신가요?{' '}
             <Link to="/sign-up" onClick={handleModal}>
               SIGN UP
             </Link>
-          </S.SignUpLink>
-        </S.ModalContainer>
+          </SignUpLink>
+        </ModalContainer>
       </Container>
-    </S.ModalOverlay>
+    </ModalOverlay>
   )
 }
 
