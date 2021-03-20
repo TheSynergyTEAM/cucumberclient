@@ -46,6 +46,7 @@ export const Menu = styled.ul`
   font-weight: 600;
   li {
     list-style: none;
+    cursor: pointer;
   }
 `
 
