@@ -1,19 +1,25 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const StyledContainer = styled.div`
   display: block;
-  padding: ${({ theme }) => theme.paddings.xxl};
-  background-color: ${({ theme }) => theme.palette.white.main};
   border-radius: 5px;
-  margin: ${({ theme }) => theme.margins.xxxl} 0;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+  ${({ theme }) => css`
+    padding: ${theme.paddings.xxl};
+    background-color: ${theme.palette.white.main};
+    margin: ${theme.palette.white.main};
+  `}
 `
 
 export const StyledTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: bold;
-  margin-bottom: ${({ theme }) => theme.margins.lg};
+
+  ${({ theme }) => css`
+    font-size: ${theme.fontSizes.xl};
+    margin-bottom: ${theme.margins.lg};
+  `}
 `
 
 export const StyledTitlePrimaryColor = styled.span`

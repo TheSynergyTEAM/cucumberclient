@@ -1,5 +1,5 @@
 import bp from 'styles/breakpoints'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const StyledContainer = styled.div`
   ${bp.mobileL} {
@@ -8,21 +8,29 @@ export const StyledContainer = styled.div`
 `
 
 export const StyledTitle = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: bold;
-  margin-bottom: ${({ theme }) => theme.margins.md};
+
+  ${({ theme }) => css`
+    margin-bottom: ${theme.margins.md};
+    font-size: ${theme.fontSizes.md};
+  `}
 `
 
 export const StyledDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.palette.grey[5]};
+  ${({ theme }) => css`
+    font-size: ${theme.fontSizes.xs};
+    color: ${theme.palette.grey[5]};
+  `}
 `
 
 export const StyledList = styled.ul`
-  margin: ${({ theme }) => theme.margins.xl} 0;
   padding: 0 1rem;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
   list-style: initial;
+
+  ${({ theme }) => css`
+    margin: ${theme.margins.xl} 0;
+    font-size: ${theme.fontSizes.sm};
+  `}
 `
 
 export const StyledListItem = styled.li`
