@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import SignInContext from 'context/SignIn'
+
 import Container from 'components/common/Container'
 import { Link } from 'react-router-dom'
 import * as S from './style'
 import { Form, Input, Button } from 'antd'
-import 'animate.css/animate.css'
+import { CloseOutlined } from '@ant-design/icons'
 
 const layout = {
   labelCol: { span: 24 },
@@ -29,7 +31,9 @@ const SignIn: React.FC<SignInProps> = ({ handleModal }) => {
       <Container>
         <S.ModalContainer>
           <S.ModalNav>
-            <Button onClick={handleModal}>X</Button>
+            <Button onClick={handleModal}>
+              <CloseOutlined />
+            </Button>
           </S.ModalNav>
           <S.StyledForm>
             <S.Title>시작하기</S.Title>
