@@ -33,7 +33,7 @@ export const Title = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.xxxl};
   color: ${({ theme }) => theme.palette.green[6]};
   font-weight: 700;
-  margin: ${({ theme }) => `${theme.margins.xxl} 0`};
+  margin: ${({ theme }) => `${theme.margins.xl} 0`};
 `
 
 export const SubText = styled.p`
@@ -42,7 +42,7 @@ export const SubText = styled.p`
   text-align: center;
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: black; /* 이부분은 palette에 색상을 추가해서 하려고하는데 palette에 black을 추가했는데도 여기에는 적용이 안되서 일단은 이렇게 적어놨음.*/
-  font-weight: 500;
+  font-weight: 400;
   ${bp.laptop} {
     font-size: ${({ theme }) => theme.fontSizes.md};
   }
