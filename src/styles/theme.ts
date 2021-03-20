@@ -23,6 +23,7 @@ export interface Colors {
 }
 
 export interface Units {
+  xs?: string
   sm: string
   md: string
   lg: string
@@ -33,6 +34,7 @@ export interface Units {
 }
 
 const fontSizes: Units = {
+  xs: calcRem(12),
   sm: calcRem(14),
   md: calcRem(16),
   lg: calcRem(18),

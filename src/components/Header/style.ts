@@ -15,10 +15,12 @@ export const Logo = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.logo};
   font-weight: 500;
   font-family: 'Recipekorea';
+  display: inline-block;
 `
 
 export const InputBox = styled.div`
-  width: 25vw;
+  width: 50%;
+  margin: 0 1rem;
   border: 1px solid ${({ theme }) => theme.palette.grey.main};
   border-radius: 5px;
   padding: ${({ theme }) => theme.paddings.md};

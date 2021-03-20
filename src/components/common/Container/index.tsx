@@ -18,7 +18,8 @@ export const Column: Partial<ColumnsWidth> = {
   xs: 24,
   md: 18,
   lg: 12,
-  xl: 10
+  xl: 10,
+  xxl: 8
 }
 
 const Container: React.FC<ContainerProps> = ({

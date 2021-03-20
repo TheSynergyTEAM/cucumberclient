@@ -16,8 +16,12 @@
     "main": "#ffffff"
   },
   "grey": {
-    "0": "#ced4da",
-    "1": "#bcc0c4",
-    "main": "#ced4da"
+    "0": "#ededed",
+    "1": "#dddddd",
+    "2": "#cdcdcd",
+    "3": "#bfbfbf",
+    "4": "#b1b1b1",
+    "5": "#a5a5a5",
+    "main": "#cdcdcd"
   }
 }
