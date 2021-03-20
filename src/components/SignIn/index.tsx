@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import SignInContext from 'context/SignIn'
+import React from 'react'
 
 import Container from 'components/common/Container'
 import { Link } from 'react-router-dom'
