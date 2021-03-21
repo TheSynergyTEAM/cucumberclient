@@ -19,30 +19,79 @@ export const StyledMessageWrapper = styled.div`
   width: 100;
 `
 
-export const StyledMessage = styled.div<Pick<SampleMessage, 'type'>>`
-  max-width: 350px;
-  border-radius: 5px;
+// export const StyledMessage = styled.div``
+
+type MessageType = Pick<SampleMessage, 'type'>
+
+export const StyledMessage = styled.div<MessageType>`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
   ${(props) => css`
     margin-bottom: ${props.theme.margins.md};
-    padding: ${props.theme.paddings.lg};
   `}
 
   ${(props) => {
     switch (props.type) {
       case 'me':
         return css`
-          background-color: ${props.theme.palette.green[1]};
           align-self: flex-end;
         `
       case 'system':
         return css`
-          background-color: ${props.theme.palette.grey[0]};
           align-self: center;
         `
       case 'y':
         return css`
-          background-color: ${props.theme.palette.grey[1]};
           align-self: flex-start;
+        `
+    }
+  }}
+`
+
+export const StyledMessageValue = styled.div<MessageType>`
+  max-width: 350px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: ${({ theme }) => theme.paddings.lg};
+
+  ${(props) => {
+    switch (props.type) {
+      case 'me':
+        return css`
+          background-color: ${props.theme.palette.green[1]};
+          order: 2;
+        `
+      case 'system':
+        return css`
+          color: ${props.theme.palette.white.main};
+          background-color: ${props.theme.palette.grey[5]};
+        `
+      case 'y':
+        return css`
+          background-color: ${props.theme.palette.grey[0]};
+          order: 1;
+        `
+    }
+  }}
+`
+
+export const StyledMessageDate = styled.div<MessageType>`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+
+  ${(props) => {
+    switch (props.type) {
+      case 'me':
+        return css`
+          margin-right: ${props.theme.margins.sm};
+          order: 1;
+        `
+      case 'y':
+        return css`
+          margin-left: ${props.theme.margins.sm};
+          order: 2;
         `
     }
   }}

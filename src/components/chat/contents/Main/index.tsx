@@ -1,10 +1,17 @@
 import { useColumnSize } from 'components/chat/hooks/column-size'
 import React from 'react'
-import { StyledChatMain, StyledMessage, StyledMessageWrapper } from './style'
+import {
+  StyledChatMain,
+  StyledMessage,
+  StyledMessageDate,
+  StyledMessageValue,
+  StyledMessageWrapper
+} from './style'
 
 export interface SampleMessage {
   value: string
   type: 'me' | 'y' | 'system'
+  date?: string
 }
 
 const messages: SampleMessage[] = [
@@ -26,7 +33,8 @@ const messages: SampleMessage[] = [
   },
   {
     value: 'ㅇㅋㅇㅋ',
-    type: 'me'
+    type: 'me',
+    date: '07:22'
   },
   {
     value: '메세지 테스트 123123123123123123123123',
@@ -61,8 +69,10 @@ const messages: SampleMessage[] = [
     type: 'y'
   },
   {
-    value: '메세지 테스트 123123123123123123123123',
-    type: 'y'
+    value:
+      '메세지 테스트 123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123',
+    type: 'y',
+    date: '07:44'
   }
 ]
 
@@ -73,12 +83,19 @@ const ChatMain: React.FC = () => {
     <StyledChatMain span={center}>
       <StyledMessageWrapper>
         {messages.map((message) => (
-          <StyledMessage
-            key={Math.floor(Math.random() * 10000)}
-            type={message.type}
-          >
-            {message.value}
-          </StyledMessage>
+          <>
+            <StyledMessage
+              key={Math.floor(Math.random() * 99999)}
+              type={message.type}
+            >
+              <StyledMessageValue type={message.type}>
+                {message.value}
+              </StyledMessageValue>
+              <StyledMessageDate type={message.type}>
+                {message.date}
+              </StyledMessageDate>
+            </StyledMessage>
+          </>
         ))}
       </StyledMessageWrapper>
     </StyledChatMain>
