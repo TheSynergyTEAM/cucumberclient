@@ -42,7 +42,7 @@ const Container: React.FC<ContainerProps> = ({
       </Col>
     </Row>
   ) : (
-    <ChatContainer />
+    <ChatContainer origin={children} />
   )
 }
 

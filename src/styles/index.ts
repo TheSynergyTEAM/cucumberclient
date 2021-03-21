@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
     background-color: #f2f7f3;
     overflow: hidden;
     height: 100%;

@@ -1,12 +1,16 @@
 import React from 'react'
 import ChatHeader from '../Header'
-import { StyledChatContainer } from './style'
+import { StyledChatContainer, StyledChatMain } from './style'
 
-const ChatContainer: React.FC = ({ children }) => {
+interface ChatContainerProps {
+  origin: React.ReactNode
+}
+
+const ChatContainer: React.FC<ChatContainerProps> = ({ origin }) => {
   return (
     <StyledChatContainer>
       <ChatHeader />
-      {children}
+      <StyledChatMain>{origin}</StyledChatMain>
     </StyledChatContainer>
   )
 }
