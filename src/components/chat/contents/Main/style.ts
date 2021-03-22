@@ -1,8 +1,10 @@
-import { Col } from 'antd'
+import { Col, Input } from 'antd'
 import styled, { css } from 'styled-components'
 import type { SampleMessage } from './'
 
 export const StyledChatMain = styled(Col)`
+  height: 100%;
+  position: relative;
   overflow-y: scroll;
 
   ${(props) => css`
@@ -16,10 +18,10 @@ export const StyledMessageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 100;
+  width: 100%;
+  /* 헤더 높이 + 여분 */
+  margin-bottom: calc(60px + 25px);
 `
-
-// export const StyledMessage = styled.div``
 
 type MessageType = Pick<SampleMessage, 'type'>
 
@@ -95,4 +97,67 @@ export const StyledMessageDate = styled.div<MessageType>`
         `
     }
   }}
+`
+
+export const StyledMessageInputWrapper = styled.div`
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+`
+
+export const StyledMessageInputInner = styled.div`
+  position: fixed;
+  z-index: 2000;
+  bottom: 0;
+  width: 100%;
+`
+
+export const StyledMessageInputItem = styled(Col)`
+  ${(props) => css`
+    padding: ${props.theme.paddings.xxxl} ${props.theme.paddings.lg};
+    background-color: ${props.theme.palette.white.main};
+    border-top: 1px solid ${props.theme.palette.grey[1]};
+    border-right: 1px solid ${props.theme.palette.grey[1]};
+  `}
+`
+
+interface MessageInputProps {
+  focusing: boolean
+}
+
+export const StyledMessageInput = styled(Input)<MessageInputProps>`
+  ${(props) => css`
+    border: none;
+    border-radius: 15px;
+
+    &::placeholder {
+      color: ${props.theme.palette.grey[3]};
+    }
+
+    ${props.focusing &&
+    css`
+      & .anticon {
+        color: ${props.theme.palette.grey[5]} !important;
+      }
+    `}
+  `}
+`
+
+export const StyledMessageSuffix = styled.div`
+  .anticon {
+    transition: color 0.5s ease;
+    will-change: color;
+    color: ${({ theme }) => theme.palette.grey[3]};
+
+    /* 첫번째 아이콘 제외하고 마진 */
+    &:not(:first-of-type) {
+      margin-left: ${({ theme }) => theme.margins.sm};
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: ${(props) => props.theme.palette.green[4]} !important;
+    }
+  }
 `

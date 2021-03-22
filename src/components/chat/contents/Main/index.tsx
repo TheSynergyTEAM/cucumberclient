@@ -1,12 +1,18 @@
 import { useColumnSize } from 'components/chat/hooks/column-size'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   StyledChatMain,
   StyledMessage,
   StyledMessageDate,
+  StyledMessageInput,
+  StyledMessageInputInner,
+  StyledMessageInputItem,
+  StyledMessageInputWrapper,
+  StyledMessageSuffix,
   StyledMessageValue,
   StyledMessageWrapper
 } from './style'
+import { PictureOutlined, SendOutlined } from '@ant-design/icons'
 
 export interface SampleMessage {
   value: string
@@ -73,31 +79,76 @@ const messages: SampleMessage[] = [
       '메세지 테스트 123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123',
     type: 'y',
     date: '07:44'
+  },
+  {
+    value:
+      '메세지 테스트 123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123',
+    type: 'y',
+    date: '07:44'
+  },
+  {
+    value:
+      '메세지 테스트 123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123',
+    type: 'y',
+    date: '07:44'
+  },
+  {
+    value:
+      '메세지 테스트 123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123',
+    type: 'y',
+    date: '07:44'
+  },
+  {
+    value:
+      '메세지 테스트 123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123',
+    type: 'y',
+    date: '07:44'
   }
 ]
 
 const ChatMain: React.FC = () => {
   const { center } = useColumnSize()
+  const [focusing, setFocusing] = useState(false)
+
+  const handleFocusing = () => setFocusing(true)
+  const disableFocusing = () => setFocusing(false)
 
   return (
     <StyledChatMain span={center}>
       <StyledMessageWrapper>
         {messages.map((message) => (
-          <>
-            <StyledMessage
-              key={Math.floor(Math.random() * 99999)}
-              type={message.type}
-            >
-              <StyledMessageValue type={message.type}>
-                {message.value}
-              </StyledMessageValue>
-              <StyledMessageDate type={message.type}>
-                {message.date}
-              </StyledMessageDate>
-            </StyledMessage>
-          </>
+          <StyledMessage
+            key={Math.floor(Math.random() * 99999)}
+            type={message.type}
+          >
+            <StyledMessageValue type={message.type}>
+              {message.value}
+            </StyledMessageValue>
+            <StyledMessageDate type={message.type}>
+              {message.date}
+            </StyledMessageDate>
+          </StyledMessage>
         ))}
       </StyledMessageWrapper>
+      <StyledMessageInputWrapper>
+        <StyledMessageInputInner>
+          <StyledMessageInputItem span={center}>
+            <StyledMessageInput
+              focusing={focusing}
+              onBlur={disableFocusing}
+              onFocus={handleFocusing}
+              placeholder="메세지를 입력하세요."
+              size="large"
+              suffix={
+                <StyledMessageSuffix>
+                  <PictureOutlined />
+                  <SendOutlined />
+                </StyledMessageSuffix>
+              }
+            />
+          </StyledMessageInputItem>
+        </StyledMessageInputInner>
+      </StyledMessageInputWrapper>
     </StyledChatMain>
   )
 }
