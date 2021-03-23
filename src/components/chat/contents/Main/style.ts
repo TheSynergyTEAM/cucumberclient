@@ -1,11 +1,14 @@
 import { Col, Input } from 'antd'
 import styled, { css } from 'styled-components'
 import type { SampleMessage } from './'
+import bp from 'styles/breakpoints'
 
 export const StyledChatMain = styled(Col)`
-  height: 100%;
+  /* 100% - (헤더 높이 + 채팅 인풋 높이) */
+  height: calc(100% - (60px + 75px));
   position: relative;
-  overflow-y: scroll;
+  top: 0;
+  overflow-y: auto;
 
   ${(props) => css`
     padding: ${props.theme.paddings.xl};
@@ -19,8 +22,6 @@ export const StyledMessageWrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
-  /* 헤더 높이 + 여분 */
-  margin-bottom: calc(60px + 25px);
 `
 
 type MessageType = Pick<SampleMessage, 'type'>
@@ -30,6 +31,7 @@ export const StyledMessage = styled.div<MessageType>`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-end;
+
   ${(props) => css`
     margin-bottom: ${props.theme.margins.md};
   `}
@@ -53,7 +55,7 @@ export const StyledMessage = styled.div<MessageType>`
 `
 
 export const StyledMessageValue = styled.div<MessageType>`
-  max-width: 350px;
+  max-width: 300px;
   border-radius: 5px;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -78,10 +80,14 @@ export const StyledMessageValue = styled.div<MessageType>`
         `
     }
   }}
+
+  ${bp.mobileL} {
+    max-width: 200px;
+  }
 `
 
 export const StyledMessageDate = styled.div<MessageType>`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
 
   ${(props) => {
     switch (props.type) {
