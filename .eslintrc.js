@@ -20,6 +20,7 @@ module.exports = {
         argsIgnorePattern: '^_'
       }
     ],
+    '@typescript-eslint/ban-ts-comment': 'off',
     'prettier/prettier': 0,
     'react/prop-types': 'off'
   }

@@ -129,7 +129,7 @@ export const StyledMessageInputItem = styled(Col)`
 `
 
 interface MessageInputProps {
-  focusing: boolean
+  $focusing: boolean
 }
 
 export const StyledMessageInput = styled(Input)<MessageInputProps>`
@@ -141,7 +141,7 @@ export const StyledMessageInput = styled(Input)<MessageInputProps>`
       color: ${props.theme.palette.grey[3]};
     }
 
-    ${props.focusing &&
+    ${props.$focusing &&
     css`
       & .anticon {
         color: ${props.theme.palette.grey[5]} !important;

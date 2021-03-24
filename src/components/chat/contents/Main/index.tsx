@@ -1,5 +1,5 @@
 import { useColumnSize } from 'components/chat/hooks/column-size'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   StyledChatMain,
   StyledMessage,
@@ -109,12 +109,23 @@ const messages: SampleMessage[] = [
 const ChatMain: React.FC = () => {
   const { center } = useColumnSize()
   const [focusing, setFocusing] = useState(false)
+  const wrapper = useRef<HTMLDivElement>(null)
 
   const handleFocusing = () => setFocusing(true)
   const disableFocusing = () => setFocusing(false)
+  const onScroll = () => {
+    if (wrapper.current) {
+      const scroll = wrapper.current.scrollHeight - wrapper.current.clientHeight
+      wrapper.current.scrollTo(0, scroll)
+    }
+  }
+
+  useEffect(() => {
+    onScroll()
+  }, [])
 
   return (
-    <StyledChatMain span={center}>
+    <StyledChatMain span={center} ref={wrapper}>
       <StyledMessageWrapper>
         {messages.map((message) => (
           <StyledMessage
@@ -134,7 +145,7 @@ const ChatMain: React.FC = () => {
         <StyledMessageInputInner>
           <StyledMessageInputItem span={center}>
             <StyledMessageInput
-              focusing={focusing}
+              $focusing={focusing}
               onBlur={disableFocusing}
               onFocus={handleFocusing}
               placeholder="메세지를 입력하세요."
@@ -142,7 +153,7 @@ const ChatMain: React.FC = () => {
               suffix={
                 <StyledMessageSuffix>
                   <PictureOutlined />
-                  <SendOutlined />
+                  <SendOutlined onClick={onScroll} />
                 </StyledMessageSuffix>
               }
             />
