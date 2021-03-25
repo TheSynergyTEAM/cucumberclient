@@ -30,9 +30,14 @@ const Header: React.FC = () => {
           </InputBox>
           <Menu>
             {isSignIn ? (
-              <li>
-                <Link to="/profile">PROFILE</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="/profile">PROFILE</Link>
+                </li>
+                <li>
+                  <Link to="/">LOGOUT</Link>
+                </li>
+              </>
             ) : (
               <>
                 <li onClick={handleModal}>SIGN IN</li>

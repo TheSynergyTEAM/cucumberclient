@@ -42,12 +42,18 @@ export const InputBox = styled.div`
 `
 
 export const Menu = styled.ul`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.palette.green[1]};
-  font-weight: 600;
+  display: flex;
   li {
+    font-size: 0.4rem;
+    color: ${({ theme }) => theme.palette.green[1]};
+    font-weight: 600;
     list-style: none;
     cursor: pointer;
+    margin-right: ${({ theme }) => theme.margins.xl};
+  }
+
+  li:last-child {
+    margin-right: 0;
   }
 `
 
