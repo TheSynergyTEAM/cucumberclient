@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const StyledContatainer = styled.div`
+export const StyledContainer = styled.div`
   background-color: ${({ theme }) => theme.palette.white.main};
   border: ${({ theme }) => `1px solid ${theme.palette.grey.main}`};
   margin: ${({ theme }) => `${theme.margins.md} 0`};

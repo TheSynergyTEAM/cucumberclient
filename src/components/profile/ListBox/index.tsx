@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledContatainer, SelectBox, SelectList } from './style'
+import { StyledContainer, SelectBox, SelectList } from './style'
 import {
   ShoppingCartOutlined,
   HeartOutlined,
@@ -14,7 +14,7 @@ interface ListBoxProps {
 
 const ListBox: React.FC<ListBoxProps> = ({ selected, handleChange }) => {
   return (
-    <StyledContatainer>
+    <StyledContainer>
       <SelectBox>
         <SelectList
           isSelected={selected === 'my'}
@@ -45,7 +45,7 @@ const ListBox: React.FC<ListBoxProps> = ({ selected, handleChange }) => {
           <p>채팅목록</p>
         </SelectList>
       </SelectBox>
-    </StyledContatainer>
+    </StyledContainer>
   )
 }
 

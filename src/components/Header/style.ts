@@ -44,7 +44,7 @@ export const InputBox = styled.div`
 export const Menu = styled.ul`
   display: flex;
   li {
-    font-size: 0.4rem;
+    font-size: 0.7rem;
     color: ${({ theme }) => theme.palette.green[1]};
     font-weight: 600;
     list-style: none;
