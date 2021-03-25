@@ -6,6 +6,7 @@ export const StyledContainer = styled.div`
   border: ${({ theme }) => `1px solid ${theme.palette.grey.main}`};
   background-color: ${({ theme }) => theme.palette.white.main};
   display: flex;
+  align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   padding: ${({ theme }) => theme.paddings.md};
@@ -42,7 +43,7 @@ export const SubInfo = styled.ul`
   margin: ${({ theme }) => `${theme.margins.sm} 0`};
   li {
     list-style: none;
-    float: left;
+    float: right;
     margin-right: ${({ theme }) => theme.margins.sm};
     span {
       font-size: ${({ theme }) => theme.fontSizes.sm};

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import bp from 'styles/breakpoints'
 
 export const StyledContainer = styled.div`
   background-color: ${({ theme }) => theme.palette.white.main};
@@ -10,9 +11,13 @@ export const StyledContainer = styled.div`
 export const SelectBox = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-around;
+
+  ${bp.laptop} {
+    flex-direction: column;
+  }
 `
 
 interface IconProps {
@@ -25,13 +30,12 @@ export const SelectList = styled.li<IconProps>`
   margin: ${({ theme }) => `${theme.margins.xl} 0`};
   list-style: none;
   align-items: center;
+  justify-content:center;
   cursor: pointer;
-
   p {
     font-size: 12px;
     margin-left: ${({ theme }) => theme.margins.xl}};
   }
-
   ${(props) =>
     props.isSelected &&
     css`

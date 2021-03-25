@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledContainer, ImgBox, ArticleInfo, SubInfo } from './style'
-import { HeartOutlined, MessageOutlined } from '@ant-design/icons'
+import { HeartFilled, MessageOutlined } from '@ant-design/icons'
 
 export interface ArticleBoxProps {
   img: string
@@ -30,7 +30,7 @@ const ArticleBox: React.FC<ArticleBoxProps> = ({
         <h4>{price}원</h4>
         <SubInfo>
           <li>
-            <HeartOutlined />
+            <HeartFilled style={{ color: '#ff4a4a' }} />
             <span>{like}</span>
           </li>
           <li>
