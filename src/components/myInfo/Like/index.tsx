@@ -1,10 +1,9 @@
 import React from 'react'
 import { StyledContainer, Title, EmptyBox } from './style'
-import { ArticleBoxProps } from 'components/common/ArticleBox'
 import ArticleBox from 'components/common/ArticleBox'
 
 interface LikeProps {
-  likeList: ArticleBoxProps[]
+  likeList: article.ArticleInfo[]
 }
 
 const Like: React.FC<LikeProps> = ({ likeList }) => {

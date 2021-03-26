@@ -2,16 +2,7 @@ import React from 'react'
 import { StyledContainer, ImgBox, ArticleInfo, SubInfo } from './style'
 import { HeartFilled, MessageOutlined } from '@ant-design/icons'
 
-export interface ArticleBoxProps {
-  img: string
-  name: string
-  price: string
-  region: string
-  like: number
-  chat: number
-}
-
-const ArticleBox: React.FC<ArticleBoxProps> = ({
+const ArticleBox: React.FC<article.ArticleInfo> = ({
   img,
   name,
   price,

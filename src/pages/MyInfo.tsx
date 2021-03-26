@@ -6,10 +6,9 @@ import EditProfile from 'components/myInfo/EditProfile'
 import Trade from 'components/myInfo/Trade'
 import Like from 'components/myInfo/Like'
 import { Col, Row } from 'antd'
-import { ArticleBoxProps } from 'components/common/ArticleBox'
 
 // test data
-const article: ArticleBoxProps = {
+const article: article.ArticleInfo = {
   img:
     'https://dnvefa72aowie.cloudfront.net/origin/article/202103/E1F4AA664E524FD622535207EEB9A445165DB89079455111AD4E48433DDB20F5.jpg?q=82&s=300x300&t=crop',
   name: '자전거팝니다',

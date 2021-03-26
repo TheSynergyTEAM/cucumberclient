@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { StyledContainer, Title, EmptyBox } from './style'
-import { ArticleBoxProps } from 'components/common/ArticleBox'
 import ArticleBox from 'components/common/ArticleBox'
 
 interface TradeProps {
-  buyList: ArticleBoxProps[]
-  sellList: ArticleBoxProps[]
+  buyList: article.ArticleInfo[]
+  sellList: article.ArticleInfo[]
 }
 
 const Trade: React.FC<TradeProps> = ({ buyList, sellList }) => {
