@@ -11,7 +11,7 @@ const Search = React.lazy(() => import('pages/Search'))
 const Detail = React.lazy(() => import('pages/Detail'))
 const Create = React.lazy(() => import('pages/Create'))
 const SignUp = React.lazy(() => import('pages/SignUp'))
-const Profile = React.lazy(() => import('pages/Profile'))
+const MyInfo = React.lazy(() => import('pages/MyInfo'))
 
 const ContainerStyle: React.CSSProperties = {
   top: '80px',
@@ -32,7 +32,7 @@ const RouteWrapper: React.FC = () => {
             <Route path="/article/create" exact component={Create} />
             <Route path="/articles/:id" exact component={Detail} />
             <Route path="/sign-up" exact component={SignUp} />
-            <Route path="/profile" exact component={Profile} />
+            <Route path="/my-info" exact component={MyInfo} />
           </Suspense>
         </Switch>
       </Container>

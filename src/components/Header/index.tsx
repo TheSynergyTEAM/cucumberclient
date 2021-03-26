@@ -32,15 +32,15 @@ const Header: React.FC = () => {
             {isSignIn ? (
               <>
                 <li>
-                  <Link to="/profile">PROFILE</Link>
+                  <Link to="/my-info">내 정보</Link>
                 </li>
                 <li>
-                  <Link to="/">LOGOUT</Link>
+                  <Link to="/">로그아웃</Link>
                 </li>
               </>
             ) : (
               <>
-                <li onClick={handleModal}>SIGN IN</li>
+                <li onClick={handleModal}>로그인</li>
                 {isOpenModal && <SignIn handleModal={handleModal} />}
               </>
             )}

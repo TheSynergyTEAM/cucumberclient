@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router'
-import ProfileBox from 'components/profile/ProfileBox'
-import ListBox from 'components/profile/ListBox'
-import EditProfile from 'components/profile/EditProfile'
-import Trade from 'components/profile/Trade'
-import Like from 'components/profile/Like'
+import ProfileBox from 'components/myInfo/ProfileBox'
+import ListBox from 'components/myInfo/ListBox'
+import EditProfile from 'components/myInfo/EditProfile'
+import Trade from 'components/myInfo/Trade'
+import Like from 'components/myInfo/Like'
 import { Col, Row } from 'antd'
 import { ArticleBoxProps } from 'components/common/ArticleBox'
 
@@ -19,7 +19,7 @@ const article: ArticleBoxProps = {
   chat: 2
 }
 
-const SignUp: React.FC<RouteComponentProps> = () => {
+const MyInfo: React.FC<RouteComponentProps> = () => {
   const [selected, setSelected] = useState<string>('my') // my, trade, like, chat
 
   const selectedContent = useCallback(() => {
@@ -50,4 +50,4 @@ const SignUp: React.FC<RouteComponentProps> = () => {
   )
 }
 
-export default SignUp
+export default MyInfo
