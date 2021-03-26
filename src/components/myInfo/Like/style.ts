@@ -6,7 +6,7 @@ export const StyledContainer = styled.div`
 
 export const Title = styled.div`
   p {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     font-weight: 600;
     color: ${({ theme }) => theme.palette.grey[6]};
   }

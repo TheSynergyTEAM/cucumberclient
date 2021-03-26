@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
   StyledContainer,
   SecessionBox,
-  Text,
+  Title,
   EditBox,
   EditDetail,
   ImageBox,
@@ -22,10 +22,10 @@ const EditProfile: React.FC = () => {
   return (
     <StyledContainer>
       <EditBox>
-        <Text>
+        <Title>
           <h5>개인정보 수정</h5>
           <p>개인정보를 수정할 수 있어요.</p>
-        </Text>
+        </Title>
         <ImageBox>
           <img src="https://style.anu.edu.au/_anu/4/images/placeholders/person.png" />
           <SelectFile htmlFor="profile-img">
@@ -115,10 +115,10 @@ const EditProfile: React.FC = () => {
         </EditDetail>
       </EditBox>
       <SecessionBox>
-        <Text>
+        <Title>
           <h5>회원탈퇴</h5>
           <p>회원 탈퇴시, 모든 사용정보가 삭제됩니다.</p>
-        </Text>
+        </Title>
         <Button type="primary" htmlType="submit">
           탈퇴하기
         </Button>

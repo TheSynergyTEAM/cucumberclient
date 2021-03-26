@@ -54,6 +54,9 @@ export const EditDetail = styled.div`
   justify-content: space-between;
   h6 {
     margin: ${({ theme }) => `${theme.margins.md} 0`};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-weight: 600;
+    color: ${({ theme }) => theme.palette.grey[4]};
     width: 20%;
   }
   div {
@@ -78,7 +81,7 @@ export const SecessionBox = styled(styledBox)`
   }
 `
 
-export const Text = styled.div`
+export const Title = styled.div`
   display: flex;
   align-items: center;
   h5 {
