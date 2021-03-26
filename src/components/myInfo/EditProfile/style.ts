@@ -19,11 +19,55 @@ export const styledBox = styled.div`
 export const EditBox = styled(styledBox)`
   flex-direction: column;
 `
-export const NicknameBox = styled.div`
+
+export const ImageBox = styled.div`
+  width: 80px;
+  height: 80px;
+  margin: ${({ theme }) => `${theme.margins.xxl} 0`};
+  left: 50%;
+  margin-left: -40px;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+  }
+  input {
+    display: none;
+  }
+`
+
+export const SelectFile = styled.label`
+  position: absolute;
+  right: -10px;
+  bottom: -8px;
+  display: block;
+  background-color: ${({ theme }) => theme.palette.green[2]};
+  opacity: 0.9;
+  padding: ${({ theme }) => theme.paddings.sm};
+  border-radius: 30px;
+  cursor: pointer;
+`
+export const EditDetail = styled.div`
   margin: ${({ theme }) => `${theme.margins.md} 0`};
-  p {
+  display: flex;
+  justify-content: space-between;
+  h6 {
     margin: ${({ theme }) => `${theme.margins.md} 0`};
-    font-size: ${({ theme }) => theme.fontSizes.xs};
+    width: 20%;
+  }
+  div {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    input {
+      width: 70%;
+    }
+    p {
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+      width: 70%;
+    }
   }
 `
 
