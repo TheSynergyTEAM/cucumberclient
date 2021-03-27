@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { StyledContainer, InnerWrapper, Logo, InputBox, Menu } from './style'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import Container from 'components/common/Container'
 import SignIn from 'components/SignIn'
+import SignInContext from 'context/SignIn'
 
 const Header: React.FC = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const isSignIn = useContext(SignInContext)
 
   const handleModal = () => {
     setIsOpenModal(!isOpenModal)
@@ -27,8 +29,21 @@ const Header: React.FC = () => {
             <SearchOutlined />
           </InputBox>
           <Menu>
-            <li onClick={handleModal}>SIGN IN</li>
-            {isOpenModal && <SignIn handleModal={handleModal} />}
+            {isSignIn ? (
+              <>
+                <li>
+                  <Link to="/my-info">내 정보</Link>
+                </li>
+                <li>
+                  <Link to="/">로그아웃</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li onClick={handleModal}>로그인</li>
+                {isOpenModal && <SignIn handleModal={handleModal} />}
+              </>
+            )}
           </Menu>
         </InnerWrapper>
       </Container>
