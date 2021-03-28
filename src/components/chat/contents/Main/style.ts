@@ -1,6 +1,6 @@
 import { Col, Input } from 'antd'
+import type { SampleMessage } from 'components/chat/hooks/chat'
 import styled, { css } from 'styled-components'
-import type { SampleMessage } from './'
 import bp from 'styles/breakpoints'
 
 export const StyledChatMain = styled(Col)`
