@@ -21,6 +21,7 @@ export interface Colors {
   grey: Color
   white: Color
   black: Color
+  blue: Color
 }
 
 export interface Units {
@@ -46,6 +47,7 @@ const fontSizes: Units = {
 }
 
 const paddings: Units = {
+  xs: calcRem(2),
   sm: calcRem(8),
   md: calcRem(10),
   lg: calcRem(12),

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Row, Col, RowProps, ColProps } from 'antd'
+import { useLocation } from 'react-router-dom'
+import ChatContainer from 'components/chat/Container'
 
 interface ContainerProps {
   rowProps?: RowProps
@@ -27,12 +29,20 @@ const Container: React.FC<ContainerProps> = ({
   colProps = {},
   children
 }) => {
-  return (
+  const location = useLocation()
+
+  const isChatPage = useCallback(() => {
+    return location.pathname.startsWith('/chat')
+  }, [location.pathname])
+
+  return !isChatPage() ? (
     <Row justify="center" gutter={10} align="middle" {...rowProps}>
       <Col {...colProps} {...Column}>
         {children}
       </Col>
     </Row>
+  ) : (
+    <ChatContainer origin={children} />
   )
 }
 

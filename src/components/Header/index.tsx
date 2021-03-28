@@ -1,5 +1,5 @@
+import { Link, useLocation } from 'react-router-dom'
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { StyledContainer, InnerWrapper, Logo, InputBox, Menu } from './style'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import Container from 'components/common/Container'
@@ -7,6 +7,7 @@ import SignIn from 'components/SignIn'
 import SignInContext from 'context/SignIn'
 
 const Header: React.FC = () => {
+  const location = useLocation()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const isSignIn = useContext(SignInContext)
 
@@ -14,7 +15,7 @@ const Header: React.FC = () => {
     setIsOpenModal(!isOpenModal)
   }
 
-  return (
+  return location.pathname !== '/chat' ? (
     <StyledContainer>
       <Container rowProps={{ justify: 'center', style: { width: '100%' } }}>
         <InnerWrapper>
@@ -48,7 +49,7 @@ const Header: React.FC = () => {
         </InnerWrapper>
       </Container>
     </StyledContainer>
-  )
+  ) : null
 }
 
 export default Header
