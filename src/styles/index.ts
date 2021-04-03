@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #f2f7f3;
     overflow: hidden;
     height: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
   }
 
   a {
