@@ -28,10 +28,10 @@ const SignUpStep: React.FC = () => {
 
   return (
     <StyledStep>
-      <StyledStepItem direction="left" active={getSignUp('left')}>
+      <StyledStepItem direction="left" $active={getSignUp('left')}>
         <StyledInner>
           <StyledInnerIconWrap>
-            <CheckIcon active={getSignUp('left')} />
+            <CheckIcon $active={getSignUp('left')} />
           </StyledInnerIconWrap>
           <StyledTitle>
             <StyledTitlePrimaryColor>양식</StyledTitlePrimaryColor>에 맞춰
@@ -40,10 +40,10 @@ const SignUpStep: React.FC = () => {
           <StyledDescription>빠진 곳 없이 꼼꼼하게!</StyledDescription>
         </StyledInner>
       </StyledStepItem>
-      <StyledStepItem direction="right" active={getSignUp('right')}>
+      <StyledStepItem direction="right" $active={getSignUp('right')}>
         <StyledInner>
           <StyledInnerIconWrap>
-            <UserIcon active={getSignUp('right')} />
+            <UserIcon $active={getSignUp('right')} />
           </StyledInnerIconWrap>
           <StyledTitle>회원가입 완료</StyledTitle>
           <StyledDescription>우리 동네에서 중고 거래하기</StyledDescription>
