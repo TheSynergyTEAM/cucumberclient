@@ -1,6 +1,5 @@
-/* eslint-disable */
 declare namespace article {
-  interface ArticleInfo {
+  export interface ArticleInfo {
     img: string
     name: string
     price: string
@@ -9,3 +8,6 @@ declare namespace article {
     chat: number
   }
 }
+
+// null과 undefined를 가질 수 있는 타입 정의
+declare type Nullable<T> = T | null | undefined

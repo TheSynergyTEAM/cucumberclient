@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Input, Select } from 'antd'
 import { StyledForm } from './style'
-import { useAddrCity } from '../hooks/address'
+import { useAddrCity } from 'components/auth/hooks/address'
 
 // 한 줄에 아이템을 2개 표현할 때 사용합니다.
 // 인자 값이 true면 margin-right를 포함합니다.
@@ -18,10 +18,23 @@ const halfStyle: (isMargin: boolean) => React.CSSProperties = (isMargin) => {
 
 const SignUpForm: React.FC = () => {
   const [form] = Form.useForm()
-  const { cities } = useAddrCity()
+  const [parentAddr, setParentAddr] = useState<Nullable<number>>(undefined)
+  const { parentAddress, childAddress, childAddrDisabled } = useAddrCity(
+    parentAddr
+  )
 
   const handleSubmit = (values: any) => {
+    // 회원가입 버튼 클릭 이벤트
     console.log(values)
+  }
+
+  const handleChangeParentAddr = (value: any) => {
+    setParentAddr(value)
+
+    // 광역시,도가 변경되면 하위 주소를 null로 만듭니다.
+    form.setFieldsValue({
+      childAddress: null
+    })
   }
 
   return (
@@ -38,19 +51,23 @@ const SignUpForm: React.FC = () => {
       <Form.Item required name="pwRe">
         <Input type="password" placeholder="비밀번호 확인" />
       </Form.Item>
-      <Form.Item required style={halfStyle(true)} name="parentLocation">
-        <Select placeholder="광역시/도">
-          {/* <Select.Option value={1}>서울특별시</Select.Option> */}
-          {cities.map((city) => (
-            <Select.Option value={city.id} key={city.id}>
-              {city.name}
+      <Form.Item required style={halfStyle(true)} name="parentAddress">
+        <Select placeholder="광역시/도" onChange={handleChangeParentAddr}>
+          {parentAddress.map((address) => (
+            <Select.Option value={address.id} key={address.id}>
+              {address.name}
             </Select.Option>
           ))}
         </Select>
       </Form.Item>
-      <Form.Item required style={halfStyle(false)} name="childLocation">
-        <Select placeholder="구">
-          <Select.Option value={1}>서울특별시</Select.Option>
+      <Form.Item required style={halfStyle(false)} name="childAddress">
+        <Select placeholder="구" disabled={childAddrDisabled}>
+          {childAddress &&
+            childAddress.streetList.map((address) => (
+              <Select.Option key={address} value={address}>
+                {address}
+              </Select.Option>
+            ))}
         </Select>
       </Form.Item>
       <Form.Item>
