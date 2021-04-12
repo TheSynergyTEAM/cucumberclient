@@ -4,12 +4,12 @@ import { StyledContainer, InnerWrapper, Logo, InputBox, Menu } from './style'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import Container from 'components/common/Container'
 import SignIn from 'components/SignIn'
-import SignInContext from 'context/SignIn'
+import UserContext from 'context/user'
 
 const Header: React.FC = () => {
   const location = useLocation()
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const isSignIn = useContext(SignInContext)
+  const { isLoggedIn } = useContext(UserContext)
 
   const handleModal = () => {
     setIsOpenModal(!isOpenModal)
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
             <SearchOutlined />
           </InputBox>
           <Menu>
-            {isSignIn ? (
+            {isLoggedIn ? (
               <>
                 <li>
                   <Link to="/my-info">내 정보</Link>
