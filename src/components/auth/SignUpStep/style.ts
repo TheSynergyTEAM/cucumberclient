@@ -7,7 +7,7 @@ export const StyledStep = styled.div`
 `
 
 interface StyledStepItemProps {
-  active: boolean
+  $active: boolean
   direction: 'left' | 'right'
 }
 
@@ -19,7 +19,7 @@ export const StyledStepItem = styled.div<StyledStepItemProps>`
   border: 1px solid ${({ theme }) => theme.palette.grey[1]};
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       border: 1px solid ${({ theme }) => theme.palette.green.main};
       background-color: #f8fbf8;
@@ -59,7 +59,7 @@ export const StyledDescription = styled.div`
 `
 
 interface IconProps {
-  active: boolean
+  $active: boolean
 }
 
 export const CheckIcon = styled(CheckCircleOutlined)<IconProps>`
@@ -67,7 +67,7 @@ export const CheckIcon = styled(CheckCircleOutlined)<IconProps>`
   font-size: 2.5rem;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       transition: color 0.5s ease;
       color: ${({ theme }) => theme.palette.green.main};
@@ -79,7 +79,7 @@ export const UserIcon = styled(UsergroupAddOutlined)<IconProps>`
   font-size: 2.5rem;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       transition: color 0.5s ease;
       color: ${({ theme }) => theme.palette.green.main};
