@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { StyledContainer, ImgBox, ArticleInfo, SubInfo } from './style'
 import { HeartFilled, MessageOutlined } from '@ant-design/icons'
 
-const ArticleBox: React.FC<article.ArticleInfo> = ({
+const ArticleBox: React.FC<Article.ArticleInfo> = ({
   id,
   img,
   name,

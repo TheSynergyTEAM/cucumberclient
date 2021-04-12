@@ -11,7 +11,7 @@ const imgList = [
   'https://dnvefa72aowie.cloudfront.net/origin/article/202103/E1F4AA664E524FD622535207EEB9A445165DB89079455111AD4E48433DDB20F5.jpg?q=82&s=300x300&t=crop'
 ]
 
-const detail: article.ArticleDetail = {
+const detail: Article.ArticleDetail = {
   id: 1,
   img: [
     'https://dnvefa72aowie.cloudfront.net/origin/article/202103/E1F4AA664E524FD622535207EEB9A445165DB89079455111AD4E48433DDB20F5.jpg?q=82&s=300x300&t=crop',

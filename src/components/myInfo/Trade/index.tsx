@@ -3,8 +3,8 @@ import { StyledContainer, Title, EmptyBox } from './style'
 import ArticleBox from 'components/common/ArticleBox'
 
 interface TradeProps {
-  buyList: article.ArticleInfo[]
-  sellList: article.ArticleInfo[]
+  buyList: Article.ArticleInfo[]
+  sellList: Article.ArticleInfo[]
 }
 
 const Trade: React.FC<TradeProps> = ({ buyList, sellList }) => {
