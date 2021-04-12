@@ -11,7 +11,7 @@ import { Button } from 'antd'
 import { HeartOutlined, HeartFilled, ShareAltOutlined } from '@ant-design/icons'
 
 interface DetailInfoProps {
-  articleInfo: article.ArticleDetail
+  articleInfo: Article.ArticleDetail
 }
 
 const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {

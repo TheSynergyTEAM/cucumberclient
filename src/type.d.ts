@@ -1,5 +1,5 @@
 /* eslint-disable */
-declare namespace article {
+declare namespace Article {
   interface ArticleInfo {
     id?: number
     img: string
