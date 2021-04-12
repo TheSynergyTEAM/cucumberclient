@@ -31,7 +31,7 @@ const RouteWrapper: React.FC = () => {
             <Route path="/" exact component={Main} />
             <Route path="/search/:word" exact component={Search} />
             <Route path="/article/create" exact component={Create} />
-            <Route path="/articles/:id" exact component={Detail} />
+            <Route path="/article/:id" exact component={Detail} />
             <Route path="/sign-up" exact component={SignUp} />
             <Route path="/chat" exact component={Chat} />
             <Route path="/my-info" exact component={MyInfo} />
