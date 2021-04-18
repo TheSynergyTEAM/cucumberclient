@@ -1,9 +1,13 @@
-export type ParentAddress = {
-  id: number
-  name: string
-}
+export {}
 
-export type ChildAddress = {
-  city: string
-  streetList: string[]
+declare global {
+  export type ParentAddress = {
+    id: number
+    name: string
+  }
+
+  export type ChildAddress = {
+    city: string
+    streetList: string[]
+  }
 }

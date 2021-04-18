@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { getChildAddress, getParentAddress } from 'api/address'
-import { ChildAddress, ParentAddress } from 'types/address'
 
 // 광역시,도
 // 첫 렌더링 때 가져옵니다.

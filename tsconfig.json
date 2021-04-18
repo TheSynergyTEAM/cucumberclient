@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": ["./src/type.d.ts"]
+    "typeRoots": ["src/types/*"]
   },
   "include": ["src"]
 }

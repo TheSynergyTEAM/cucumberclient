@@ -1,4 +1,6 @@
-declare namespace Article {
+export {}
+
+declare global {
   interface ArticleInfo {
     id?: number
     img: string
@@ -24,18 +26,4 @@ declare namespace Article {
     user_profile: string
     desc: string
   }
-}
-
-// null과 undefined를 가질 수 있는 타입 정의
-declare type Nullable<T> = T | null | undefined
-
-// 유저 타입
-declare type User = {
-  name: string
-  city: string
-  street1: string
-  birthDate: string
-  email: string
-  contact: string
-  ratingScore: number
 }
