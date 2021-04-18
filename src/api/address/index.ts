@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios'
-import type { ChildAddress, ParentAddress } from 'types/address'
 
 // 광역시,도를 가져옵니다.
 export const getParentAddress: () => Promise<ParentAddress[]> = async () => {

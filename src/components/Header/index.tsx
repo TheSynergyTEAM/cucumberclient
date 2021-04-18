@@ -30,7 +30,7 @@ const Header: React.FC = () => {
             <SearchOutlined />
           </InputBox>
           <Menu>
-            {isSignIn ? (
+            {!isSignIn ? (
               <>
                 <li>
                   <Link to="/my-info">내 정보</Link>
