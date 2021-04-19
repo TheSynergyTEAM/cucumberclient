@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Form, Input, Select } from 'antd'
+import { Button, Form, Input, message, Select } from 'antd'
 import { StyledForm } from './style'
 import { useAddrCity } from 'components/auth/hooks/address'
 import { FormItemProps, Rule } from 'antd/lib/form'
+import { signUp } from 'api/auth'
 
 // 한 줄에 아이템을 2개 표현할 때 사용합니다.
 // 인자 값이 true면 margin-right를 포함합니다.
@@ -80,7 +81,7 @@ const formRule: FormRule = {
     { required: true, message: '비밀번호를 다시 한번 입력해주세요.' },
     ({ getFieldsValue }) => ({
       validator(_, value) {
-        if (getFieldsValue(['pw']).pw === value) {
+        if (getFieldsValue(['password']).password === value) {
           return Promise.resolve()
         }
         return Promise.reject()
@@ -123,11 +124,52 @@ const SignUpForm: React.FC = () => {
   const { parentAddress, childAddress, childAddrDisabled } = useAddrCity(
     parentAddr
   )
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (_values: any) => {
+    setLoading(true)
     // 회원가입 버튼 클릭 이벤트
     const formData = await form.validateFields()
-    console.log(formData)
+    // 데이터 가공
+    // 핸드폰 번호 (01025989724 -> 010-2598-9724)
+    const processContact = (contact: string) => {
+      const r = contact.split('')
+      r.splice(3, 0, '-')
+      r.splice(8, 0, '-')
+      return r.join('')
+    }
+    formData.contact = processContact(formData.contact)
+    // 광역시,도 아이디 값으로 해당 지역 이름 찾기
+    formData.street1 = parentAddress.find(
+      (addr) => addr.id === formData.street1
+    )?.name
+    // 생년월일 (970313 -> 1997-03-13)
+    const processBirthDate = (birthDate: string) => {
+      const r = birthDate.split('')
+      r.splice(2, 0, '-')
+      r.splice(5, 0, '-')
+
+      const yearPostfix = parseInt(r[0] + r[1])
+
+      if (yearPostfix > 50) {
+        r.unshift('1', '9')
+      } else {
+        r.unshift('2', '0')
+      }
+
+      return r.join('')
+    }
+    formData.birthDate = processBirthDate(formData.birthdate)
+    delete formData.birthdate
+
+    try {
+      signUp(formData)
+      message.success('회원가입 성공')
+    } catch (error) {
+      return message.error(error.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleChangeParentAddr = (value: any) => {
@@ -149,7 +191,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         {...baseFormItemProps}
         style={halfStyle(true)}
-        name="id"
+        name="name"
         rules={formRule.id}
       >
         <Input placeholder="아이디" />
@@ -162,7 +204,11 @@ const SignUpForm: React.FC = () => {
       >
         <Input placeholder="이메일" type="email" />
       </Form.Item>
-      <Form.Item {...baseFormItemProps} name="pw" rules={formRule.password}>
+      <Form.Item
+        {...baseFormItemProps}
+        name="password"
+        rules={formRule.password}
+      >
         <Input type="password" placeholder="비밀번호" />
       </Form.Item>
       <Form.Item
@@ -176,7 +222,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         required
         style={halfStyle(true)}
-        name="parentAddress"
+        name="street1"
         rules={formRule.parentAddr}
       >
         <Select placeholder="광역시/도" onChange={handleChangeParentAddr}>
@@ -190,7 +236,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         required
         style={halfStyle(false)}
-        name="childAddress"
+        name="street2"
         rules={formRule.childAddr}
         dependencies={['parentAddress']}
       >
@@ -206,7 +252,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         {...baseFormItemProps}
         style={halfStyle(true)}
-        name="phone"
+        name="contact"
         rules={formRule.phone}
       >
         <Input type="tel" placeholder="전화번호" maxLength={11} max={11} />
@@ -214,13 +260,18 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         {...baseFormItemProps}
         style={halfStyle(false)}
-        name="birth"
+        name="birthdate"
         rules={formRule.birth}
       >
         <Input type="text" placeholder="생년월일" maxLength={6} max={6} />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" style={{ width: '100%' }} htmlType="submit">
+        <Button
+          type="primary"
+          style={{ width: '100%' }}
+          htmlType="submit"
+          loading={loading}
+        >
           회원가입
         </Button>
       </Form.Item>

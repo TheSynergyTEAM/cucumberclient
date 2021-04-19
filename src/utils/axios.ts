@@ -13,5 +13,10 @@ export default function createAxiosInstance(): void {
     }
     return value
   })
-  // axios.interceptors.response.use()
+  axios.interceptors.response.use((value) => {
+    if (value.headers.authorization) {
+      localStorage.setItem('token', value.headers.authorization)
+    }
+    return value
+  })
 }

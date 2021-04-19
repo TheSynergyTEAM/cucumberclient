@@ -13,8 +13,19 @@ declare global {
     contact: string
   }
 
-  export type SignInInfo = {
-    id: string
+  export type LoginUser = {
+    email: string
     password: string
+  }
+
+  export type User = {
+    id: number
+    name: string
+    city: string
+    street1: string
+    birthdate: string
+    email: string
+    contact: string
+    ratingScore: number
   }
 }
