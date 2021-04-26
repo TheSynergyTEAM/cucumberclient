@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form, Input, message, Select } from 'antd'
 import { StyledForm } from './style'
-import { useAddrCity } from 'components/auth/hooks/address'
+import { useAddrCity } from 'hooks/useAddress'
 import { FormItemProps, Rule } from 'antd/lib/form'
 import { signUp } from 'api/auth'
 import { useHistory } from 'react-router-dom'
