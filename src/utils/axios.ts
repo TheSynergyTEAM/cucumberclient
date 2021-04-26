@@ -10,6 +10,7 @@ export default function createAxiosInstance(): void {
     const token = localStorage.getItem('token')
     if (token) {
       value.headers.Authorization = token
+      value.headers.refreshToken = 'true'
     }
     return value
   })

@@ -4,6 +4,7 @@ import { StyledForm } from './style'
 import { useAddrCity } from 'components/auth/hooks/address'
 import { FormItemProps, Rule } from 'antd/lib/form'
 import { signUp } from 'api/auth'
+import { useHistory } from 'react-router-dom'
 
 // 한 줄에 아이템을 2개 표현할 때 사용합니다.
 // 인자 값이 true면 margin-right를 포함합니다.
@@ -125,6 +126,7 @@ const SignUpForm: React.FC = () => {
     parentAddr
   )
   const [loading, setLoading] = useState(false)
+  const history = useHistory()
 
   const handleSubmit = async (_values: any) => {
     setLoading(true)
@@ -140,8 +142,8 @@ const SignUpForm: React.FC = () => {
     }
     formData.contact = processContact(formData.contact)
     // 광역시,도 아이디 값으로 해당 지역 이름 찾기
-    formData.street1 = parentAddress.find(
-      (addr) => addr.id === formData.street1
+    formData.city = parentAddress.find(
+      (addr) => addr.id === formData.city
     )?.name
     // 생년월일 (970313 -> 1997-03-13)
     const processBirthDate = (birthDate: string) => {
@@ -159,12 +161,12 @@ const SignUpForm: React.FC = () => {
 
       return r.join('')
     }
-    formData.birthDate = processBirthDate(formData.birthdate)
-    delete formData.birthdate
+    formData.birthdate = processBirthDate(formData.birthdate)
 
     try {
-      signUp(formData)
+      await signUp(formData)
       message.success('회원가입 성공')
+      history.push('/')
     } catch (error) {
       return message.error(error.message)
     } finally {
@@ -222,7 +224,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         required
         style={halfStyle(true)}
-        name="street1"
+        name="city"
         rules={formRule.parentAddr}
       >
         <Select placeholder="광역시/도" onChange={handleChangeParentAddr}>
@@ -236,7 +238,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item
         required
         style={halfStyle(false)}
-        name="street2"
+        name="street1"
         rules={formRule.childAddr}
         dependencies={['parentAddress']}
       >

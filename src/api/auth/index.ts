@@ -18,7 +18,7 @@ export const login: (user: LoginUser) => Promise<User> = async (user) => {
 // 회원가입
 export const signUp: (user: SignUpInfo) => Promise<boolean> = async (user) => {
   try {
-    const { data } = await axios.post('/members', user)
+    const { data } = await axios.post('/member', user)
     return !!data.id
   } catch (error) {
     throw error.response.data

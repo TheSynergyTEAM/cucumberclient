@@ -1,6 +1,4 @@
-export {}
-
-declare global {
+export declare global {
   export type SignUpInfo = {
     name: string
     password: string
@@ -9,7 +7,7 @@ declare global {
     street2: string
     zipcode: string
     email: string
-    birthDate: string
+    birthdate: string
     contact: string
   }
 

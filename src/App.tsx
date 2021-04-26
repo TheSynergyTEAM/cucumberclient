@@ -9,9 +9,14 @@ const App: React.FC = () => {
   const [user, setUser] = useState<Nullable<User>>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const mutateUser = (user: User) => {
-    setUser(user)
-    setIsLoggedIn(true)
+  const mutateUser = (user: User | null) => {
+    if (!user) {
+      setUser(null)
+      setIsLoggedIn(false)
+    } else {
+      setUser(user)
+      setIsLoggedIn(true)
+    }
   }
 
   return (

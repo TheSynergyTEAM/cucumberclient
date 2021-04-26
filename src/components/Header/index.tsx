@@ -1,18 +1,27 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import React, { useState, useContext } from 'react'
 import { StyledContainer, InnerWrapper, Logo, InputBox, Menu } from './style'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import Container from 'components/common/Container'
 import SignIn from 'components/SignIn'
 import UserContext from 'context/user'
+import { logout } from 'api/auth'
 
 const Header: React.FC = () => {
   const location = useLocation()
+  const history = useHistory()
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const { isLoggedIn } = useContext(UserContext)
+  const { isLoggedIn, setUser } = useContext(UserContext)
 
   const handleModal = () => {
     setIsOpenModal(!isOpenModal)
+  }
+
+  const handleLogout = () => {
+    logout()
+    setUser(null)
+    history.push('/')
+    setIsOpenModal(false)
   }
 
   return location.pathname !== '/chat' ? (
@@ -35,13 +44,15 @@ const Header: React.FC = () => {
                 <li>
                   <Link to="/my-info">내 정보</Link>
                 </li>
-                <li>
-                  <Link to="/">로그아웃</Link>
+                <li onClick={handleLogout} key="logout">
+                  로그아웃
                 </li>
               </>
             ) : (
               <>
-                <li onClick={handleModal}>로그인</li>
+                <li onClick={handleModal} key="login">
+                  로그인
+                </li>
                 {isOpenModal && <SignIn handleModal={handleModal} />}
               </>
             )}
