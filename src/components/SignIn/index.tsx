@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
 import Container from 'components/common/Container'
 import { Link } from 'react-router-dom'
 import {
@@ -12,8 +11,10 @@ import {
   DivideLine,
   SignUpLink
 } from './style'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
+import { login } from 'api/auth'
+import UserContext from 'context/user'
 
 const layout = {
   labelCol: { span: 24 },
@@ -25,9 +26,17 @@ interface SignInProps {
 }
 
 const SignIn: React.FC<SignInProps> = ({ handleModal }) => {
-  //const [userInfo, setUserInfo] = useState({ id: '', password: '' })
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
+  const { setUser } = useContext(UserContext)
+  const onFinish = async (values: any) => {
+    try {
+      const user = await login({
+        email: values.username,
+        password: values.password
+      })
+      setUser(user)
+    } catch (error) {
+      return message.error(error.message)
+    }
   }
 
   const onFinishFailed = (errorInfo: any) => {
