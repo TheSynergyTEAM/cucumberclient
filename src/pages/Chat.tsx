@@ -1,3 +1,4 @@
+import RequiredLogin from 'components/auth/RequiredLogin'
 import ChatList from 'components/chat/contents/ChatList'
 import ChatMain from 'components/chat/contents/Main'
 import ChatUserInfo from 'components/chat/contents/UserInfo'
@@ -12,6 +13,7 @@ const Chat: React.FC = () => {
       {left ? <ChatList /> : null}
       <ChatMain />
       {right ? <ChatUserInfo /> : null}
+      <RequiredLogin />
     </>
   )
 }
