@@ -3,7 +3,9 @@ import userContext from 'context/user'
 import React, { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router'
 
-const RequiredLogin: React.FC = () => {
+const withRequiredLogin: (c: React.ComponentType) => React.ReactElement = (
+  Component
+) => {
   const { isLoggedIn } = useContext(userContext)
   const history = useHistory()
 
@@ -14,7 +16,7 @@ const RequiredLogin: React.FC = () => {
     }
   }, [])
 
-  return <></>
+  return <Component />
 }
 
-export default RequiredLogin
+export default withRequiredLogin
