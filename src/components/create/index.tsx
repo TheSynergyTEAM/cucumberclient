@@ -1,12 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, createRef } from 'react'
 import { Form, Input, Button, Select, Upload, Modal } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { FormItemProps, Rule } from 'antd/lib/form'
-import { StyledContainer, SliderBox, Title, SlideWrapper } from './style'
-import SliderContext from 'context/Slider'
+import {
+  StyledContainer,
+  DrawerBox,
+  Title,
+  DrawerWrapper,
+  ButtonBox
+} from './style'
 import { useAddrCity } from 'hooks/useAddress'
 import { postArticle } from 'api/article'
 import { UploadFile } from 'antd/lib/upload/interface'
+import useOutsideClick from 'hooks/useOutsideClick'
 
 const getBase64 = (file: File) => {
   return new Promise((resolve, reject) => {
@@ -32,7 +38,7 @@ type RuleTarget =
   | 'title'
   | 'parentAddr'
   | 'childAddr'
-  | 'category'
+  | 'categories'
   | 'price'
   | 'spec'
 
@@ -57,9 +63,20 @@ const formRule: FormRule = {
     }
   ],
   // 카테고리
-  category: [{ required: true, message: '카테고리를 선택해주세요' }],
+  categories: [{ required: true, message: '카테고리를 선택해주세요' }],
   // 가격
-  price: [{ required: true, message: '가격을 입력해주세요' }],
+  price: [
+    { required: true, message: '가격을 입력해주세요' },
+    (_) => ({
+      validator(_, value) {
+        if (Number(value)) {
+          return Promise.resolve()
+        }
+        return Promise.reject()
+      },
+      message: '숫자만 입력할수있습니다.'
+    })
+  ],
   // 광역시,도
   parentAddr: [{ required: true, message: '광역시,도를 선택해주세요.' }],
   // 구
@@ -78,7 +95,11 @@ const baseFormItemProps: FormItemProps = {
   hasFeedback: true
 }
 
-const Create = () => {
+interface CreateProps {
+  isShowDrawer: boolean
+  setIsShowDrawer: React.Dispatch<React.SetStateAction<boolean>>
+}
+const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
   const [form] = Form.useForm()
   const [imgs, setImgs] = useState<Files>({
     previewVisible: false,
@@ -86,6 +107,10 @@ const Create = () => {
     previewTitle: '사진을 올려보세요',
     fileList: []
   })
+
+  // drawer 외부 클릭시 꺼지게 하기위해 추가
+  const drawerRef = createRef<HTMLDivElement>()
+  useOutsideClick(drawerRef, () => setIsShowDrawer(false))
 
   const [parentAddr, setParentAddr] = useState<Nullable<number>>(undefined)
   const { parentAddress, childAddress, childAddrDisabled } = useAddrCity(
@@ -112,33 +137,27 @@ const Create = () => {
     setImgs({ ...imgs, fileList })
   }
 
-  const { setIsVisible, isVisible } = useContext(SliderContext)
-
   const { Option } = Select
 
   // 상품 등록하기
   const handleSubmit = async (_values: any) => {
     const formData = await form.validateFields()
 
-    // FIX >> 가격 입력시 숫자 외의 값들을 제거 : 입력시에 검사하도록 변경
-    const processPrice = (price: string) => {
-      price = price.replaceAll(',', '')
-      return parseInt(price)
-    }
-    formData.price = processPrice(formData.price)
-
     // 광역시,도 아이디 값으로 해당 지역 이름 찾기
     formData.city = parentAddress.find(
       (addr) => addr.id === formData.city
     )?.name
 
+    // 1 > 유저 아이디로 수정해야함
     const newArticleInfo = {
-      member: { id: 1 },
-      address: { city: formData.city, street1: formData.street1 },
+      id: 1,
+      city: formData.city,
+      street1: formData.street1,
       title: formData.title,
       spec: formData.spec,
       price: formData.price,
-      category: formData.category
+      category: formData.categories,
+      sold: false
     }
 
     postArticle(newArticleInfo)
@@ -162,11 +181,11 @@ const Create = () => {
 
   return (
     <StyledContainer>
-      <SlideWrapper isVisible={isVisible}>
-        <SliderBox>
+      <DrawerWrapper isVisible={isShowDrawer} ref={drawerRef}>
+        <DrawerBox>
           <Title>
             <p>상품 등록하기</p>
-            <p>판매하실 상품을 적어보시요요요요요요요요요요요요요요요요욘</p>
+            <p>판매하실 상품에대해 적어보세요</p>
           </Title>
           <Form
             layout="horizontal"
@@ -190,8 +209,8 @@ const Create = () => {
             </Form.Item>
             <Form.Item
               required
-              name="category"
-              rules={formRule.category}
+              name="categories"
+              rules={formRule.categories}
               dependencies={['parentAddress']}
             >
               <Select placeholder="카테고리">
@@ -242,7 +261,10 @@ const Create = () => {
               </Select>
             </Form.Item>
             <Form.Item name="spec">
-              <Input.TextArea placeholder="상세설명" />
+              <Input.TextArea
+                placeholder="판매하실 상품에대해 설명해주세요"
+                style={{ minHeight: '200px' }}
+              />
             </Form.Item>
             <div>
               <Upload
@@ -266,17 +288,17 @@ const Create = () => {
                 />
               </Modal>
             </div>
-            <Form.Item wrapperCol={{ span: 24 }}>
-              <Button type="primary" onClick={() => setIsVisible(false)}>
+            <ButtonBox>
+              <Button type="primary" onClick={() => setIsShowDrawer(false)}>
                 취소하기
               </Button>
               <Button type="primary" htmlType="submit">
                 등록하기
               </Button>
-            </Form.Item>
+            </ButtonBox>
           </Form>
-        </SliderBox>
-      </SlideWrapper>
+        </DrawerBox>
+      </DrawerWrapper>
     </StyledContainer>
   )
 }

@@ -1,18 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import { Input, Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { RouteComponentProps } from 'react-router-dom'
-import SliderContext from 'context/Slider'
+import Create from 'components/create'
 
 const Main: React.FC<RouteComponentProps> = () => {
-  const { setIsVisible } = useContext(SliderContext)
+  const [isShowDrawer, setIsShowDrawer] = useState<boolean>(false)
   return (
     <div>
       <Input />
-      <Button onClick={() => setIsVisible(true)}>
+      <Button onClick={() => setIsShowDrawer(true)}>
         <PlusOutlined />
         상품등록
       </Button>
+      {isShowDrawer && (
+        <Create isShowDrawer={isShowDrawer} setIsShowDrawer={setIsShowDrawer} />
+      )}
     </div>
   )
 }

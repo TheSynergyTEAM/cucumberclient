@@ -5,8 +5,7 @@ export const postArticle: (form: any) => Promise<number> = async (form) => {
   console.log(form)
   try {
     const { data } = await axios.post<any, AxiosResponse<number>>('/item', {
-      header: {},
-      body: form
+      ...form
     })
     return data
   } catch (error) {
