@@ -26,4 +26,16 @@ declare global {
     user_profile: string
     desc: string
   }
+  interface ArticleData {
+    id: number
+    member: string
+    city: string
+    street: string
+    title: string
+    categories: string
+    price: number
+    spec: string
+    sold: boolean
+    create: string
+  }
 }
