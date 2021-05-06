@@ -26,4 +26,8 @@ declare global {
     user_profile: string
     desc: string
   }
+  interface Category {
+    key: string
+    value: string
+  }
 }

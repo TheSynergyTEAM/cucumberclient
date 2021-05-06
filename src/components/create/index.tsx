@@ -1,5 +1,5 @@
-import React, { useState, createRef } from 'react'
-import { Form, Input, Button, Select, Upload, Modal } from 'antd'
+import React, { useState } from 'react'
+import { Form, Input, Button, Select, Modal, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { FormItemProps, Rule } from 'antd/lib/form'
 import {
@@ -7,12 +7,14 @@ import {
   DrawerBox,
   Title,
   DrawerWrapper,
-  ButtonBox
+  ButtonBox,
+  StyledUpload
 } from './style'
 import { useAddrCity } from 'hooks/useAddress'
+import { useCategory } from 'hooks/useCategory'
 import { postArticle } from 'api/article'
 import { UploadFile } from 'antd/lib/upload/interface'
-import useOutsideClick from 'hooks/useOutsideClick'
+// import useOutsideClick from 'hooks/useOutsideClick'
 
 const getBase64 = (file: File) => {
   return new Promise((resolve, reject) => {
@@ -109,13 +111,15 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
   })
 
   // drawer 외부 클릭시 꺼지게 하기위해 추가
-  const drawerRef = createRef<HTMLDivElement>()
-  useOutsideClick(drawerRef, () => setIsShowDrawer(false))
+  // const drawerRef = createRef<HTMLDivElement>()
+  // useOutsideClick(drawerRef, () => setIsShowDrawer(false))
 
   const [parentAddr, setParentAddr] = useState<Nullable<number>>(undefined)
   const { parentAddress, childAddress, childAddrDisabled } = useAddrCity(
     parentAddr
   )
+  const { categories } = useCategory()
+
   const handleCancel = () => setImgs({ ...imgs, previewVisible: false })
 
   const handlePreview = async (file: any) => {
@@ -137,8 +141,6 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
     setImgs({ ...imgs, fileList })
   }
 
-  const { Option } = Select
-
   // 상품 등록하기
   const handleSubmit = async (_values: any) => {
     const formData = await form.validateFields()
@@ -149,27 +151,34 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
     )?.name
 
     // 1 > 유저 아이디로 수정해야함
-    const newArticleInfo = {
-      id: 1,
-      city: formData.city,
-      street1: formData.street1,
-      title: formData.title,
-      spec: formData.spec,
-      price: formData.price,
-      category: formData.categories,
-      sold: false
-    }
+    const articleInfo = new FormData()
+    articleInfo.append('id', '1')
+    articleInfo.append('city', formData.city)
+    articleInfo.append('street1', formData.street1)
+    articleInfo.append('title', formData.title)
+    articleInfo.append('spec', formData.spec)
+    articleInfo.append('price', formData.price)
+    articleInfo.append('categories', formData.categories)
+    articleInfo.append('sold', 'false')
+    imgs.fileList.map((file) =>
+      articleInfo.append(
+        'files',
+        new Blob([JSON.stringify(file)], { type: 'application/json' })
+      )
+    )
+    postArticle(articleInfo)
 
-    postArticle(newArticleInfo)
+    try {
+      await postArticle(articleInfo)
+      message.success('상품이 등록되었습니다')
+      setIsShowDrawer(false)
+    } catch (error) {
+      return message.error('상품을 등록하지못했습니다')
+    }
   }
 
   const handleChangeParentAddr = (value: any) => {
     setParentAddr(value)
-
-    // 광역시,도가 변경되면 하위 주소를 null로 만듭니다.
-    form.setFieldsValue({
-      childAddress: null
-    })
   }
 
   const uploadButton = (
@@ -181,7 +190,11 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
 
   return (
     <StyledContainer>
-      <DrawerWrapper isVisible={isShowDrawer} ref={drawerRef}>
+      <DrawerWrapper
+        style={isShowDrawer ? { right: '0' } : { right: '-500px' }}
+        isVisible={isShowDrawer}
+        // ref={drawerRef}
+      >
         <DrawerBox>
           <Title>
             <p>상품 등록하기</p>
@@ -207,26 +220,13 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
             >
               <Input placeholder="가격" />
             </Form.Item>
-            <Form.Item
-              required
-              name="categories"
-              rules={formRule.categories}
-              dependencies={['parentAddress']}
-            >
+            <Form.Item required name="categories" rules={formRule.categories}>
               <Select placeholder="카테고리">
-                <Option value="DIGIT">디지털/가전</Option>
-                <Option value="INTERIOR">가구/인테리어</Option>
-                <Option value="KID">유아동/유아도서</Option>
-                <Option value="LIVING">생활/가공식품</Option>
-                <Option value="LEISURE">스포츠/레저</Option>
-                <Option value="WOMAN">여성의류/잡화</Option>
-                <Option value="MAN">남성의류/잡화</Option>
-                <Option value="BEAUTY">뷰티/미용</Option>
-                <Option value="PET">반려동물용품</Option>
-                <Option value="HOBBY">게임/취미</Option>
-                <Option value="CULTURAL">도서/티켓/음반</Option>
-                <Option value="PLANT">식물</Option>
-                <Option value="ETC">기타</Option>
+                {categories.map((category) => (
+                  <Select.Option key={category.value} value={category.value}>
+                    {category.value}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
 
@@ -266,28 +266,28 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
                 style={{ minHeight: '200px' }}
               />
             </Form.Item>
-            <div>
-              <Upload
-                listType="picture-card"
-                fileList={imgs.fileList}
-                onPreview={handlePreview}
-                onChange={handleChange}
-              >
-                {imgs.fileList.length >= 8 ? null : uploadButton}
-              </Upload>
-              <Modal
-                visible={imgs.previewVisible}
-                title={imgs.previewTitle}
-                footer={null}
-                onCancel={handleCancel}
-              >
-                <img
-                  alt="example"
-                  style={{ width: '100%' }}
-                  src={imgs.previewImage}
-                />
-              </Modal>
-            </div>
+            <StyledUpload
+              listType="picture-card"
+              fileList={imgs.fileList}
+              onPreview={handlePreview}
+              onChange={handleChange}
+              accept="image/*"
+            >
+              {imgs.fileList.length >= 6 ? null : uploadButton}
+            </StyledUpload>
+
+            <Modal
+              visible={imgs.previewVisible}
+              title={imgs.previewTitle}
+              footer={null}
+              onCancel={handleCancel}
+            >
+              <img
+                alt="example"
+                style={{ width: '100%' }}
+                src={imgs.previewImage}
+              />
+            </Modal>
             <ButtonBox>
               <Button type="primary" onClick={() => setIsShowDrawer(false)}>
                 취소하기
