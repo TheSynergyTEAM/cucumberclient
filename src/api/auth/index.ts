@@ -3,10 +3,11 @@ import axios from 'axios'
 // 로그인
 export const login: (user: LoginUser) => Promise<User> = async (user) => {
   try {
-    const { data: userData } = await axios.post('/login', {
+    const { data: userData, headers } = await axios.post('/login', {
       email: user.email,
       password: user.password
     })
+    console.log(headers)
     return userData
   } catch (error) {
     throw error.response.data

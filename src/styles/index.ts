@@ -29,6 +29,9 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  .ant-skeleton-element {
+    width: 100%;
+  }
 `
 
 export default GlobalStyle
