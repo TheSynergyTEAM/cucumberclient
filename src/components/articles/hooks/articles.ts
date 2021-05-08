@@ -24,7 +24,7 @@ export const useRecentArticles: () => HooksMeta = () => {
       const articles = await getAllArticles()
       // 최근 순으로 정렬
       articles.sort(
-        (a, b) => new Date(b.create).getTime() - new Date(a.create).getTime()
+        (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
       )
       setArticles(articles.slice(0, MAX_VIEW_COUNT))
       setLoading(false)

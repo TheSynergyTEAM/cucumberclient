@@ -36,6 +36,6 @@ declare global {
     price: number
     spec: string
     sold: boolean
-    create: string
+    created: string
   }
 }
