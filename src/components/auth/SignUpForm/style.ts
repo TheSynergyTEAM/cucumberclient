@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Form } from 'antd'
 import bp from 'styles/breakpoints'
 
@@ -17,5 +17,11 @@ export const StyledForm = styled(Form)`
 
   & .ant-form-item {
     margin-bottom: 12px;
+    &-explain {
+      ${(props) => css`
+        font-size: ${props.theme.fontSizes.xs};
+        padding: ${props.theme.paddings.xs};
+      `}
+    }
   }
 `

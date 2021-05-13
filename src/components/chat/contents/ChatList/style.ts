@@ -53,11 +53,4 @@ export const StyledItemTitle = styled.div`
 
 export const StyledBadge = styled(Badge)`
   margin-left: ${({ theme }) => theme.margins.sm};
-  position: relative;
-  top: -1px;
-
-  & p {
-    position: relative;
-    top: 1px;
-  }
 `
