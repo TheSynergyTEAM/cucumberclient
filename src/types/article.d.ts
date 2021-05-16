@@ -41,4 +41,8 @@ declare global {
     views: number
     thumbnailid: number
   }
+  interface Category {
+    key: string
+    value: string
+  }
 }
