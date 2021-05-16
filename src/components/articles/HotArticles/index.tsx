@@ -5,11 +5,11 @@ import Card from '../Card'
 import { useArticles } from '../hooks/articles'
 import ArticleLoading from '../Loading'
 
-const RecentArticles: React.FC = () => {
+const HotArticles: React.FC = () => {
   const { articles, loading, empty } = useArticles('recent')
 
   return (
-    <SectionBase title="최근 매물">
+    <SectionBase title="HOT한 매물">
       <Row gutter={20} justify="start">
         {loading ? (
           <ArticleLoading />
@@ -25,4 +25,4 @@ const RecentArticles: React.FC = () => {
   )
 }
 
-export default RecentArticles
+export default HotArticles

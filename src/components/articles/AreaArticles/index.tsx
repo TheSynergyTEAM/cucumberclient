@@ -2,11 +2,11 @@ import { Empty, Row } from 'antd'
 import { SectionBase } from 'components/main/SectionContainer'
 import React from 'react'
 import Card from '../Card'
-import { useArticles } from '../hooks/articles'
+import { useAreaArticles } from '../hooks/articles'
 import ArticleLoading from '../Loading'
 
-const RecentArticles: React.FC = () => {
-  const { articles, loading, empty } = useArticles('recent')
+const AreaArticles: React.FC = () => {
+  const { articles, loading, empty } = useAreaArticles()
 
   return (
     <SectionBase title="최근 매물">
@@ -25,4 +25,4 @@ const RecentArticles: React.FC = () => {
   )
 }
 
-export default RecentArticles
+export default AreaArticles

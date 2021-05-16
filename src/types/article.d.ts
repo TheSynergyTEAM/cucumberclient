@@ -37,5 +37,8 @@ declare global {
     spec: string
     sold: boolean
     created: string
+    fileid: number
+    views: number
+    thumbnailid: number
   }
 }

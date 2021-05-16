@@ -16,7 +16,8 @@ const MyInfo = React.lazy(() => import('pages/MyInfo'))
 
 const ContainerStyle: React.CSSProperties = {
   top: '80px',
-  position: 'relative'
+  position: 'relative',
+  paddingBottom: '5rem'
 }
 
 const RouteWrapper: React.FC = () => {
