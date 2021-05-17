@@ -168,7 +168,6 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
     postArticle(articleInfo)
 
     try {
-      await postArticle(articleInfo)
       message.success('상품이 등록되었습니다')
       setIsShowDrawer(false)
     } catch (error) {
