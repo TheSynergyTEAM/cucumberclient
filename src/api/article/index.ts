@@ -59,3 +59,18 @@ export const getCategories: () => Promise<Category[]> = async () => {
     throw new Error(error)
   }
 }
+
+// 특정 상품에 대한 정보를 받아옵니다
+export const getArticle: (itemId: string) => Promise<ArticleData> = async (
+  itemId
+) => {
+  try {
+    const { data } = await axios.get<any, AxiosResponse<ArticleData>>(
+      `/item/${itemId}`
+    )
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  }
+}
