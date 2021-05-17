@@ -60,9 +60,9 @@ const margins: Units = {
   sm: calcRem(8),
   md: calcRem(10),
   lg: calcRem(12),
-  xl: calcRem(14),
-  xxl: calcRem(16),
-  xxxl: calcRem(18)
+  xl: calcRem(20),
+  xxl: calcRem(28),
+  xxxl: calcRem(40)
 }
 
 const palette: Colors = {

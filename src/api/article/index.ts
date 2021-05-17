@@ -1,5 +1,17 @@
 import axios, { AxiosResponse } from 'axios'
 
+export const getAllArticles: () => Promise<ArticleData[]> = async () => {
+  try {
+    const { data } = await axios.get<any, AxiosResponse<ArticleData[]>>(
+      '/item/list'
+    )
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  }
+}
+
 // 상품을 등록합니다
 export const postArticle: (form: FormData) => Promise<number> = async (
   form
@@ -10,6 +22,27 @@ export const postArticle: (form: FormData) => Promise<number> = async (
     return data
   } catch (error) {
     console.error(error)
+    throw new Error(error)
+  }
+}
+
+export const getAllArticlesWithArea: (
+  city: string,
+  street: string
+) => Promise<ArticleData[]> = async (city, street) => {
+  try {
+    const { data } = await axios.get<any, AxiosResponse<ArticleData[]>>(
+      `/item/area`,
+      {
+        params: {
+          city,
+          street
+        }
+      }
+    )
+    return data
+  } catch (error) {
+    console.log(error)
     throw new Error(error)
   }
 }
