@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 export const StyledContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 500px;
   position: relative;
-  padding: 30px 0;
+  padding: 20px 0;
   box-sizing: border-box;
   .ant-carousel,
   .slick-list,

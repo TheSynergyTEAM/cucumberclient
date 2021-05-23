@@ -6,7 +6,7 @@ type SortOptions = 'recent' | 'hot'
 type SortMethod<T> = (a: T, b: T) => number
 
 interface HooksMeta {
-  articles: ArticleData[]
+  articles: ArticleCardData[]
   loading: boolean
   empty: boolean
 }
@@ -31,13 +31,13 @@ const sortHot: SortMethod<ArticleData> = (cur, next) => {
 }
 
 // 내 지역별 정렬
-const sortArea: SortMethod<ArticleData> = (cur, next) => {
+const sortArea: SortMethod<ArticleCardData> = (cur, next) => {
   return sortRecent(cur, next)
 }
 
 // 매물 정렬
 export const useArticles: (sortOption: SortOptions) => HooksMeta = (opt) => {
-  const [articles, setArticles] = useState<ArticleData[]>([])
+  const [articles, setArticles] = useState<ArticleCardData[]>([])
   const [loading, setLoading] = useState(true)
   const [empty, setEmpty] = useState(false)
 
@@ -76,7 +76,7 @@ export const useArticles: (sortOption: SortOptions) => HooksMeta = (opt) => {
 // 지역별
 export const useAreaArticles: () => HooksMeta = () => {
   const { user } = useContext(userContext)
-  const [articles, setArticles] = useState<ArticleData[]>([])
+  const [articles, setArticles] = useState<ArticleCardData[]>([])
   const [loading, setLoading] = useState(true)
   const [empty, setEmpty] = useState(false)
 

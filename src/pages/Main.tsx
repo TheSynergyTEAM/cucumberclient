@@ -4,7 +4,7 @@ import RecentArticles from 'components/articles/RecentArticles'
 import SectionContainer from 'components/main/SectionContainer'
 import userContext from 'context/user'
 import React, { useContext, useEffect, useState } from 'react'
-import { Input, Button } from 'antd'
+import { Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { RouteComponentProps } from 'react-router-dom'
 import Create from 'components/create'
@@ -25,12 +25,11 @@ const Main: React.FC<RouteComponentProps> = () => {
 
   return (
     <>
-      <SectionContainer childSections={childSections} />
-      <Input />
       <Button onClick={() => setIsShowDrawer(true)}>
         <PlusOutlined />
         상품등록
       </Button>
+      <SectionContainer childSections={childSections} />
       {isShowDrawer && (
         <Create isShowDrawer={isShowDrawer} setIsShowDrawer={setIsShowDrawer} />
       )}

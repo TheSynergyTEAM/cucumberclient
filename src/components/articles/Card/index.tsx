@@ -1,11 +1,21 @@
-import { Col, Image, Space } from 'antd'
+import { Col, Image } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { COLUMN_SIZE } from '../hooks/articles'
-import { Bottom, Title, Tags, Tag } from './style'
+import {
+  Bottom,
+  Title,
+  Tags,
+  Tag,
+  StyledSpace,
+  SubInfo,
+  IconBox,
+  Price
+} from './style'
+import { HeartOutlined, MessageOutlined } from '@ant-design/icons'
 
 interface CardProps {
-  article: ArticleData
+  article: ArticleCardData
 }
 
 interface CardTagsProps {
@@ -35,7 +45,7 @@ const Card: React.FC<CardProps> = ({ article }) => {
 
   return (
     <Col span={COLUMN_SIZE}>
-      <Space direction="vertical" style={{ width: '100%' }}>
+      <StyledSpace direction="vertical" style={{ width: '100%' }}>
         <Link to={`/article/${article.id}`}>
           <Image
             preview={false}
@@ -48,9 +58,20 @@ const Card: React.FC<CardProps> = ({ article }) => {
           <Link to={`/article/${article.id}`} type="span">
             <Title>{article.title}</Title>
           </Link>
+          <Price>{article.price}원</Price>
           <CardTags tags={tags} />
+          <SubInfo>
+            <IconBox>
+              <HeartOutlined style={{ color: '#cdcdcd' }} />
+              <p>{5}</p>
+            </IconBox>
+            <IconBox>
+              <MessageOutlined style={{ color: '#cdcdcd' }} />
+              <p>{5}</p>
+            </IconBox>
+          </SubInfo>
         </Bottom>
-      </Space>
+      </StyledSpace>
     </Col>
   )
 }

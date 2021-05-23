@@ -8,7 +8,6 @@ export const StyledContainer = styled.div`
   ${({ theme }) => css`
     margin: ${theme.margins.xl} 0;
     padding: ${theme.paddings.xxxl} ${theme.paddings.lg};
-    background-color: ${theme.palette.white.main};
   `}
 `
 

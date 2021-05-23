@@ -1,31 +1,6 @@
 export {}
 
 declare global {
-  interface ArticleInfo {
-    id?: number
-    img: string
-    name: string
-    price: string
-    region: string
-    like: number
-    chat: number
-  }
-  interface ArticleDetail {
-    id: number
-    img: string[]
-    nickname: string
-    rating: number
-    name: string
-    category: string
-    upload_time: string
-    price: string
-    region: string
-    like: number
-    chat: number
-    views: number
-    user_profile: string
-    desc: string
-  }
   interface ArticleData {
     id: number
     member: string
@@ -37,8 +12,10 @@ declare global {
     spec: string
     sold: boolean
     created: string
-    fileid: number
+    fileid: number[]
     views: number
+  }
+  interface ArticleCardData extends ArticleData {
     thumbnailid: number
   }
   interface Category {
