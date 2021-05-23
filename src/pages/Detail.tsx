@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'antd'
 import { RouteComponentProps } from 'react-router-dom'
+import withRequiredLogin from 'hoc/RequiredLogin'
 import DetailInfo from 'components/detail/DetailInfo'
 import ImgBox from 'components/detail/ImgBox'
 import { getArticle } from 'api/article'
@@ -15,8 +16,11 @@ const Detail: React.FC<RouteComponentProps<{ id: string }>> = (props) => {
 
   // 상품관련 정보를 요청합니다.
   useEffect(() => {
-    getArticleInfo(props.match.params.id)
+    if (props.match) {
+      getArticleInfo(props.match.params.id)
+    }
   }, [])
+
   return (
     <Row justify="space-between">
       {articleInfo ? (
@@ -37,4 +41,4 @@ const Detail: React.FC<RouteComponentProps<{ id: string }>> = (props) => {
   )
 }
 
-export default Detail
+export default withRequiredLogin(Detail)

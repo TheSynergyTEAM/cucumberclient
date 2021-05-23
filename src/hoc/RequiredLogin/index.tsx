@@ -3,11 +3,12 @@ import { message } from 'antd'
 import userContext from 'context/user'
 import React, { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router'
+import { RouteComponentProps } from 'react-router-dom'
 
-const withRequiredLogin: (Component: React.ComponentType<any>) => React.FC = (
-  Component
-) => {
-  const Wrapper: React.FC = () => {
+const withRequiredLogin: (
+  Component: React.ComponentType<any>
+) => React.FC<RouteComponentProps> = (Component) => {
+  const Wrapper: React.FC<RouteComponentProps> = (props) => {
     const { isLoggedIn } = useContext(userContext)
     const history = useHistory()
 
@@ -18,7 +19,7 @@ const withRequiredLogin: (Component: React.ComponentType<any>) => React.FC = (
       }
     }, [])
 
-    return <Component />
+    return <Component {...props} />
   }
 
   return Wrapper

@@ -46,8 +46,8 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
           </ArticleDesc>
           <OtherInfo>
             <p>
-              채팅 {articleInfo.views} 관심 {0} 조회
-              {0}
+              채팅 {0} 관심 {0} 조회
+              {articleInfo.views}
             </p>
           </OtherInfo>
           <ButtonBox>
