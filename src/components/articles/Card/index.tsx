@@ -15,7 +15,7 @@ import {
 import { HeartOutlined, MessageOutlined } from '@ant-design/icons'
 
 interface CardProps {
-  article: ArticleData
+  article: ArticleCardData
 }
 
 interface CardTagsProps {

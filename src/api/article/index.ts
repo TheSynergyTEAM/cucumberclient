@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios'
 
-export const getAllArticles: () => Promise<ArticleData[]> = async () => {
+export const getAllArticles: () => Promise<ArticleCardData[]> = async () => {
   try {
-    const { data } = await axios.get<any, AxiosResponse<ArticleData[]>>(
+    const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
       '/item/list'
     )
     return data
@@ -29,9 +29,9 @@ export const postArticle: (form: FormData) => Promise<number> = async (
 export const getAllArticlesWithArea: (
   city: string,
   street: string
-) => Promise<ArticleData[]> = async (city, street) => {
+) => Promise<ArticleCardData[]> = async (city, street) => {
   try {
-    const { data } = await axios.get<any, AxiosResponse<ArticleData[]>>(
+    const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
       `/item/area`,
       {
         params: {

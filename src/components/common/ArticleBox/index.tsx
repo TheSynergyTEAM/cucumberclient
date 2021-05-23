@@ -3,33 +3,34 @@ import { Link } from 'react-router-dom'
 import { StyledContainer, ImgBox, ArticleInfo, SubInfo } from './style'
 import { HeartFilled, MessageOutlined } from '@ant-design/icons'
 
-const ArticleBox: React.FC<ArticleInfo> = ({
+const ArticleBox: React.FC<ArticleData> = ({
   id,
-  img,
-  name,
+  city,
+  street,
+  title,
   price,
-  region,
-  like,
-  chat
+  fileid
 }) => {
   return (
     <Link to={`/article/${id}`}>
       <StyledContainer>
         <ImgBox>
-          <img src={img} />
+          <img src={`/image/${fileid[0]}`} />
         </ImgBox>
         <ArticleInfo>
-          <h2>{name}</h2>
-          <h5> {region}</h5>
+          <h2>{title}</h2>
+          <h5>
+            {city} {street}
+          </h5>
           <h4>{price}원</h4>
           <SubInfo>
             <li>
               <HeartFilled style={{ color: '#ff4a4a' }} />
-              <span>{like}</span>
+              <span>{0}</span>
             </li>
             <li>
               <MessageOutlined />
-              <span>{chat}</span>
+              <span>{0}</span>
             </li>
           </SubInfo>
         </ArticleInfo>
