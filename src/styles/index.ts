@@ -14,7 +14,6 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: auto;
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'Noto Sans KR', sans-serif;
-    overflow-y:auto;
   }
 
   a {
