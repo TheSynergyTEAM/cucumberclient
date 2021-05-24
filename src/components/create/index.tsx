@@ -101,7 +101,7 @@ interface CreateProps {
   isShowDrawer: boolean
   setIsShowDrawer: React.Dispatch<React.SetStateAction<boolean>>
 }
-const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
+const Create: React.FC<CreateProps> = ({ isShowDrawer, setIsShowDrawer }) => {
   const [form] = Form.useForm()
   const [imgs, setImgs] = useState<Files>({
     previewVisible: false,
@@ -116,9 +116,8 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
   // useOutsideClick(drawerRef, () => setIsShowDrawer(false))
 
   const [parentAddr, setParentAddr] = useState<Nullable<number>>(undefined)
-  const { parentAddress, childAddress, childAddrDisabled } = useAddrCity(
-    parentAddr
-  )
+  const { parentAddress, childAddress, childAddrDisabled } =
+    useAddrCity(parentAddr)
   const { categories } = useCategory()
 
   const handleCancel = () => setImgs({ ...imgs, previewVisible: false })
