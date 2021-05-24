@@ -12,8 +12,10 @@ const Chat = React.lazy(() => import('pages/Chat'))
 const MyInfo = React.lazy(() => import('pages/MyInfo'))
 
 const ContainerStyle: React.CSSProperties = {
+  margin: '0',
   top: '80px',
-  position: 'relative'
+  position: 'relative',
+  paddingBottom: '5rem'
 }
 
 const RouteWrapper: React.FC = () => {

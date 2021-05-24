@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getCategories } from 'api/article'
 
 // 첫 렌더링시 카테고리정보를 받아옵니다
-export const useCategory = () => {
+export const useCategory: () => { categories: Category[] } = () => {
   const [categories, setCategories] = useState<Category[]>([])
 
   useEffect(() => {

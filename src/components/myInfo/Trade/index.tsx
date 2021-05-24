@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { StyledContainer, Title, EmptyBox } from './style'
 import ArticleBox from 'components/common/ArticleBox'
 
-interface TradeProps {
-  buyList: ArticleInfo[]
-  sellList: ArticleInfo[]
-}
-
-const Trade: React.FC<TradeProps> = ({ buyList, sellList }) => {
+const Trade: React.FC = () => {
   const [type, setType] = useState('buy')
+
+  // 판매, 구매 목록 받아오는 처리가 필요함 > 아직 api없어서 임시로 만들어놓음
+  const [sellList] = useState<ArticleCardData[]>([])
+  const [buyList] = useState<ArticleCardData[]>([])
+
   return (
     <StyledContainer>
       <Title type={type}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Form, Input, Button, Select, Modal, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { FormItemProps, Rule } from 'antd/lib/form'
@@ -101,7 +101,7 @@ interface CreateProps {
   isShowDrawer: boolean
   setIsShowDrawer: React.Dispatch<React.SetStateAction<boolean>>
 }
-const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
+const Create: React.FC<CreateProps> = ({ isShowDrawer, setIsShowDrawer }) => {
   const [form] = Form.useForm()
   const [imgs, setImgs] = useState<Files>({
     previewVisible: false,
@@ -110,14 +110,14 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
     fileList: []
   })
 
+  const fileListRef = useRef<File[]>([])
   // drawer 외부 클릭시 꺼지게 하기위해 추가
   // const drawerRef = createRef<HTMLDivElement>()
   // useOutsideClick(drawerRef, () => setIsShowDrawer(false))
 
   const [parentAddr, setParentAddr] = useState<Nullable<number>>(undefined)
-  const { parentAddress, childAddress, childAddrDisabled } = useAddrCity(
-    parentAddr
-  )
+  const { parentAddress, childAddress, childAddrDisabled } =
+    useAddrCity(parentAddr)
   const { categories } = useCategory()
 
   const handleCancel = () => setImgs({ ...imgs, previewVisible: false })
@@ -137,7 +137,7 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
   }
 
   const handleChange = ({ fileList }: any) => {
-    console.log(FileList)
+    console.log(fileList)
     setImgs({ ...imgs, fileList })
   }
 
@@ -160,16 +160,13 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
     articleInfo.append('price', formData.price)
     articleInfo.append('categories', formData.categories)
     articleInfo.append('sold', 'false')
-    imgs.fileList.map((file) =>
-      articleInfo.append(
-        'files',
-        new Blob([JSON.stringify(file)], { type: 'application/json' })
-      )
-    )
+
+    fileListRef.current.map((file) => {
+      articleInfo.append('files', file)
+    })
     postArticle(articleInfo)
 
     try {
-      await postArticle(articleInfo)
       message.success('상품이 등록되었습니다')
       setIsShowDrawer(false)
     } catch (error) {
@@ -272,6 +269,10 @@ const Create = ({ isShowDrawer, setIsShowDrawer }: CreateProps) => {
               onPreview={handlePreview}
               onChange={handleChange}
               accept="image/*"
+              beforeUpload={(file) => {
+                fileListRef.current = [...fileListRef.current, file]
+                return false
+              }}
             >
               {imgs.fileList.length >= 6 ? null : uploadButton}
             </StyledUpload>

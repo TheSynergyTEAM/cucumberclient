@@ -1,4 +1,4 @@
-import withRequiredLogin from 'components/auth/RequiredLogin'
+import withRequiredLogin from 'hoc/RequiredLogin'
 import ChatList from 'components/chat/contents/ChatList'
 import ChatMain from 'components/chat/contents/Main'
 import ChatUserInfo from 'components/chat/contents/UserInfo'
