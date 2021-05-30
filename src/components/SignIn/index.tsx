@@ -35,7 +35,7 @@ const SignIn: React.FC<SignInProps> = ({ handleModal }) => {
       })
       setUser(user)
     } catch (error) {
-      return message.error(error.message)
+      return message.error('로그인에 실패했습니다')
     }
   }
 
