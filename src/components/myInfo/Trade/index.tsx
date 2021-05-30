@@ -1,13 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyledContainer, Title, EmptyBox } from './style'
 import ArticleBox from 'components/common/ArticleBox'
+import { getBuyArticles, getSellArticles } from 'api/article'
 
-const Trade: React.FC = () => {
+interface TradeProps {
+  userId: Nullable<number>
+}
+
+const Trade: React.FC<TradeProps> = ({ userId }) => {
   const [type, setType] = useState('buy')
 
   // 판매, 구매 목록 받아오는 처리가 필요함 > 아직 api없어서 임시로 만들어놓음
-  const [sellList] = useState<ArticleCardData[]>([])
-  const [buyList] = useState<ArticleCardData[]>([])
+  const [sellList, setSellList] = useState<ArticleCardData[]>([])
+  const [buyList, setBuyList] = useState<ArticleCardData[]>([])
+
+  useEffect(() => {
+    if (userId) {
+      getBuyArticles(userId).then((res) => setBuyList(res))
+      getSellArticles(userId).then((res) => setSellList(res))
+    }
+  }, [])
 
   return (
     <StyledContainer>

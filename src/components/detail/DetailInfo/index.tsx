@@ -24,7 +24,7 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
         <>
           <UserInfo>
             <NameBox>
-              <img src="https://pgnqdrjultom1827145.cdn.ntruss.com/img/48/45/484566523fa21c60f55661c3dae19dd2df2a089ce81f8e10a8927b8f95c32bcb_v1.jpg" />
+              <img src="https://img2.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202105/25/holapet/20210525023300360gnuh.jpg" />
               <div>
                 <h4>{articleInfo.member}</h4>
                 <p>
