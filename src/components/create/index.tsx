@@ -14,16 +14,8 @@ import { useAddrCity } from 'hooks/useAddress'
 import { useCategory } from 'hooks/useCategory'
 import { postArticle } from 'api/article'
 import { UploadFile } from 'antd/lib/upload/interface'
+import { getBase64 } from 'utils/readFile'
 // import useOutsideClick from 'hooks/useOutsideClick'
-
-const getBase64 = (file: File) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
-}
 
 const halfStyle: (isMargin: boolean) => React.CSSProperties = (isMargin) => {
   const style: React.CSSProperties = {
