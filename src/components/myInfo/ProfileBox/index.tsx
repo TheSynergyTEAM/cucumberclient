@@ -1,14 +1,18 @@
 import React from 'react'
 import { StyledContainer, ImageBox, Nickname, Score } from './style'
 
-const ProfileBox: React.FC = () => {
+interface ProfileBoxProps {
+  user: Nullable<User>
+}
+
+const ProfileBox: React.FC<ProfileBoxProps> = ({ user }) => {
   return (
     <StyledContainer>
       <ImageBox>
         <img src="https://style.anu.edu.au/_anu/4/images/placeholders/person.png" />
       </ImageBox>
       <Nickname>
-        <span>오이말고 당근 </span>님
+        <span>{user?.name} </span>님
       </Nickname>
       <Score>
         <div>
@@ -17,7 +21,7 @@ const ProfileBox: React.FC = () => {
         </div>
         <div>
           <p>후기평점</p>
-          <p>⭐⭐⭐⭐⭐</p>
+          <p>{'⭐'.repeat(user?.ratingScore || 5)}</p>
         </div>
       </Score>
     </StyledContainer>

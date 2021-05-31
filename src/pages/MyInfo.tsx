@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext } from 'react'
+import withRequiredLogin from 'hoc/RequiredLogin'
 import { RouteComponentProps } from 'react-router'
 import ProfileBox from 'components/myInfo/ProfileBox'
 import ListBox from 'components/myInfo/ListBox'
@@ -6,16 +7,18 @@ import EditProfile from 'components/myInfo/EditProfile'
 import Trade from 'components/myInfo/Trade'
 import Like from 'components/myInfo/Like'
 import { Col, Row } from 'antd'
+import userContext from 'context/user'
 
 const MyInfo: React.FC<RouteComponentProps> = () => {
   const [selected, setSelected] = useState<string>('my') // my, trade, like, chat
+  const { user } = useContext(userContext)
 
   const selectedContent = useCallback(() => {
     switch (selected) {
       case 'my':
-        return <EditProfile />
+        return <EditProfile user={user} />
       case 'trade':
-        return <Trade />
+        return <Trade userId={user?.id} />
       case 'like':
         return <Like />
     }
@@ -28,7 +31,7 @@ const MyInfo: React.FC<RouteComponentProps> = () => {
   return (
     <Row gutter={20}>
       <Col xs={24} md={8}>
-        <ProfileBox />
+        <ProfileBox user={user} />
         <ListBox selected={selected} handleChange={handleChange} />
       </Col>
       <Col xs={24} md={16}>
@@ -38,4 +41,4 @@ const MyInfo: React.FC<RouteComponentProps> = () => {
   )
 }
 
-export default MyInfo
+export default withRequiredLogin(MyInfo)

@@ -13,6 +13,18 @@ export const login: (user: LoginUser) => Promise<User> = async (user) => {
   }
 }
 
+// 토큰으로 사용자정보 받아오기
+export const loginByToken: (token: string) => Promise<User> = async (token) => {
+  try {
+    const { data: userData } = await axios.post('/refresh', {
+      token
+    })
+    return userData
+  } catch (error) {
+    throw error.response.data
+  }
+}
+
 // 회원가입
 export const signUp: (user: SignUpInfo) => Promise<boolean> = async (user) => {
   try {
@@ -43,6 +55,16 @@ export const logout: () => void = () => {
 export const updateUser: (user: User) => Promise<User> = async (user) => {
   try {
     const { data } = await axios.patch(`/member/${user.id}`)
+    return data
+  } catch (error) {
+    throw error.response.data
+  }
+}
+
+// 회원탈퇴하기
+export const deleteUser: (userId: number) => Promise<User> = async (userId) => {
+  try {
+    const { data } = await axios.delete(`/member/${userId}`)
     return data
   } catch (error) {
     throw error.response.data
