@@ -10,6 +10,7 @@ const Detail = React.lazy(() => import('pages/Detail'))
 const SignUp = React.lazy(() => import('pages/SignUp'))
 const Chat = React.lazy(() => import('pages/Chat'))
 const MyInfo = React.lazy(() => import('pages/MyInfo'))
+const Review = React.lazy(() => import('pages/Review'))
 
 const ContainerStyle: React.CSSProperties = {
   margin: '0',
@@ -33,6 +34,7 @@ const RouteWrapper: React.FC = () => {
             <Route path="/sign-up" exact component={SignUp} />
             <Route path="/chat" exact component={Chat} />
             <Route path="/my-info" exact component={MyInfo} />
+            <Route path="/review/write/:id" exact component={Review} />
           </Suspense>
         </Switch>
       </Container>
