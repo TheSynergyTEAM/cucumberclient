@@ -74,3 +74,31 @@ export const getArticle: (itemId: string) => Promise<ArticleData> = async (
     throw new Error(error)
   }
 }
+
+// 판매한 상품에 대한 정보를 받아옵니다
+export const getSellArticles: (userId: number) => Promise<ArticleCardData[]> =
+  async (userId) => {
+    try {
+      const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
+        `item/sell?user=${userId}`
+      )
+      return data
+    } catch (error) {
+      console.error(error)
+      throw new Error(error)
+    }
+  }
+
+// 구매한 상품에 대한 정보를 받아옵니다
+export const getBuyArticles: (userId: number) => Promise<ArticleCardData[]> =
+  async (userId) => {
+    try {
+      const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
+        `item/buy?user=${userId}`
+      )
+      return data
+    } catch (error) {
+      console.error(error)
+      throw new Error(error)
+    }
+  }
