@@ -1,8 +1,13 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
+import SearchArticles from 'components/articles/SearchArticles'
 
-const Search: React.FC<RouteComponentProps> = () => {
-  return <div>Search</div>
+interface MatchParams {
+  word: string
+}
+
+const Search: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
+  return <SearchArticles search={match.params.word} />
 }
 
 export default Search

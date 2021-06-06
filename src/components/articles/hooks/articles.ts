@@ -1,5 +1,9 @@
 import userContext from 'context/user'
-import { getAllArticles, getAllArticlesWithArea } from 'api/article'
+import {
+  getAllArticles,
+  getAllArticlesWithArea,
+  getSearchArticles
+} from 'api/article'
 import { useState, useEffect, useContext } from 'react'
 
 type SortOptions = 'recent' | 'hot'
@@ -99,6 +103,35 @@ export const useAreaArticles: () => HooksMeta = () => {
       }
     }
   }, [])
+
+  return { articles, loading, empty }
+}
+
+// 검색결과
+export const useSearchArticles: (search: string) => HooksMeta = (search) => {
+  const [articles, setArticles] = useState<ArticleCardData[]>([])
+  const [loading, setLoading] = useState(true)
+  const [empty, setEmpty] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;(async () => {
+      const articles = await getSearchArticles(search)
+
+      // 검색 결과를 최신순으로 정렬
+      articles.sort(sortRecent)
+
+      setArticles(articles)
+      setLoading(false)
+      setEmpty(!articles.length)
+    })()
+
+    return () => {
+      setArticles([])
+      setLoading(true)
+      setEmpty(false)
+    }
+  }, [search])
 
   return { articles, loading, empty }
 }

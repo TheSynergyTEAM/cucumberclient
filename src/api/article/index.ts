@@ -76,29 +76,61 @@ export const getArticle: (itemId: string) => Promise<ArticleData> = async (
 }
 
 // 판매한 상품에 대한 정보를 받아옵니다
-export const getSellArticles: (userId: number) => Promise<ArticleCardData[]> =
-  async (userId) => {
-    try {
-      const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
-        `item/sell?user=${userId}`
-      )
-      return data
-    } catch (error) {
-      console.error(error)
-      throw new Error(error)
-    }
+export const getSellArticles: (
+  userId: number
+) => Promise<ArticleCardData[]> = async (userId) => {
+  try {
+    const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
+      `item/sell?user=${userId}`
+    )
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
   }
+}
 
 // 구매한 상품에 대한 정보를 받아옵니다
-export const getBuyArticles: (userId: number) => Promise<ArticleCardData[]> =
-  async (userId) => {
-    try {
-      const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
-        `item/buy?user=${userId}`
-      )
-      return data
-    } catch (error) {
-      console.error(error)
-      throw new Error(error)
-    }
+export const getBuyArticles: (
+  userId: number
+) => Promise<ArticleCardData[]> = async (userId) => {
+  try {
+    const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
+      `item/buy?user=${userId}`
+    )
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
   }
+}
+
+// 검색한 상품에 대한 정보를 받아옵니다
+export const getSearchArticles: (
+  keyword: string
+) => Promise<ArticleCardData[]> = async (keyword) => {
+  try {
+    const { data } = await axios.get<any, AxiosResponse<ArticleCardData[]>>(
+      `item/search/2?keyword=${keyword}`
+    )
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  }
+}
+
+// 특정 상품을 삭제합니다.
+export const deleteArticle: (
+  itemId: number
+) => Promise<ArticleCardData[]> = async (itemId) => {
+  try {
+    const { data } = await axios.delete<any, AxiosResponse<ArticleCardData[]>>(
+      `item/${itemId}`
+    )
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  }
+}
