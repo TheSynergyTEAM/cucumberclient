@@ -10,11 +10,19 @@ import { logout } from 'api/auth'
 const Header: React.FC = () => {
   const location = useLocation()
   const history = useHistory()
+  const [search, setSearch] = useState<string>()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const { isLoggedIn, setUser } = useContext(UserContext)
 
   const handleModal = () => {
     setIsOpenModal(!isOpenModal)
+  }
+
+  const handleSearch = () => {
+    if (search) {
+      history.push(`/search/${search}`)
+      setSearch(undefined)
+    }
   }
 
   const handleLogout = () => {
@@ -35,8 +43,15 @@ const Header: React.FC = () => {
             <input
               type="text"
               placeholder="동네 이름, 물품명 등을 검색해보세요!"
+              onChange={(e) => setSearch(e.currentTarget.value)}
+              value={search}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch()
+                }
+              }}
             />
-            <SearchOutlined />
+            <SearchOutlined onClick={handleSearch} />
           </InputBox>
           <Menu>
             {isLoggedIn ? (
