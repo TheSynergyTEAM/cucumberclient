@@ -1,5 +1,4 @@
 import { Col, Input } from 'antd'
-import type { SampleMessage } from 'components/chat/hooks/chat'
 import styled, { css } from 'styled-components'
 import bp from 'styles/breakpoints'
 

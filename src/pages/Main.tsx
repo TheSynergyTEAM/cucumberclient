@@ -30,6 +30,7 @@ const Main: React.FC<RouteComponentProps> = () => {
         상품등록
       </Button>
       <Link to="/review/write/1">리뷰작성용버튼</Link>
+      <Link to="/chat">채팅용</Link>
       <SectionContainer childSections={childSections} />
       {isShowDrawer && (
         <Create isShowDrawer={isShowDrawer} setIsShowDrawer={setIsShowDrawer} />

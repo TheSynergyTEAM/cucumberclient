@@ -1,29 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { getChatRoomList } from 'api/chat'
 
-// 테스트
-export interface SampleMessage {
-  // 메세지 내용
-  value: string
-  // 내가 보낸 메세지, 상대가 보낸 메세지, 시스템이 보낸 메세지
-  type: 'me' | 'y' | 'system'
-  // 메세지 생성 시점
-  date: number
-  // 메세지 생성 시점을 보기 편하게 문자열로 변환
-  displayDate?: string
-}
-
-type Message = SampleMessage[] | []
-
-export const useChatMessages = (): {
-  messages: Message
-  setMessages: React.Dispatch<React.SetStateAction<Message>>
+// 채팅방리스트의 내용을 얻어옴
+export const useChatRoom = (
+  userId: number
+): {
+  chatRoom: ChatRoom[]
+  setChatRoom: React.Dispatch<React.SetStateAction<ChatRoom[]>>
 } => {
-  const [messages, setMessages] = useState<Message>([])
+  const [chatRoom, setChatRoom] = useState<ChatRoom[]>([])
 
-  // @TODO......
+  const getChatroom = useCallback(
+    async (userId: number) => {
+      const data = await getChatRoomList(userId)
+      setChatRoom(data)
+    },
+    [userId]
+  )
+
+  useEffect(() => {
+    if (userId) {
+      getChatroom(userId)
+    }
+  }, [userId])
 
   return {
-    messages,
-    setMessages
+    chatRoom,
+    setChatRoom
   }
 }

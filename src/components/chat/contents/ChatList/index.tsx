@@ -1,7 +1,10 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Avatar, List } from 'antd'
+import { useChatRoom } from 'components/chat/hooks/chat'
 import { useColumnSize } from 'components/chat/hooks/column-size'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
+import userContext from 'context/user'
+import chatContext from 'context/chat'
 import { ThemeContext } from 'styled-components'
 import {
   StyledChatList,
@@ -13,48 +16,18 @@ import {
   StyledBadge
 } from './style'
 
-interface SampleData {
-  key: number
-  name: string
-  avatar: string
-  seller: boolean
-  unReadMessageCount: number
-  stuffName: string
-  lastMessage?: string
-}
-
-const sample: SampleData[] = [
-  {
-    key: 10,
-    name: '유진',
-    avatar: 'https://i.pravatar.cc/150?img=10',
-    seller: true,
-    unReadMessageCount: 1,
-    stuffName: 'LG 울트라 와이드 모니터 UL37XMCLD',
-    lastMessage: '언제 거래할래여?'
-  },
-  {
-    key: 12,
-    name: '형준',
-    avatar: 'https://i.pravatar.cc/150?img=2',
-    seller: true,
-    unReadMessageCount: 0,
-    stuffName: '다이슨 무선 청소기'
-  },
-  {
-    key: 11,
-    name: '혜원',
-    avatar: 'https://i.pravatar.cc/150?img=20',
-    seller: false,
-    unReadMessageCount: 49,
-    stuffName: '2019 맥북 프로 13인치 미개봉 풀박스',
-    lastMessage: '내일 서현역 오후 7시에 거래해여'
-  }
-]
-
 const ChatList: React.FC = () => {
   const { left } = useColumnSize()
+  const { user } = useContext(userContext)
+  const { setCurrentChatroom } = useContext(chatContext)
   const theme = useContext(ThemeContext)
+
+  const { chatRoom } = useChatRoom(user?.id || 0)
+  useEffect(() => {
+    if (chatRoom.length > 0) {
+      setCurrentChatroom(chatRoom[0])
+    }
+  }, [chatRoom])
 
   return (
     <StyledChatList span={left}>
@@ -67,30 +40,30 @@ const ChatList: React.FC = () => {
       </StyledChatListSearchWrapper>
       <List
         itemLayout="vertical"
-        dataSource={sample}
+        dataSource={chatRoom}
         renderItem={(item) => (
-          <StyledListItemWrapper>
-            <List.Item key={item.key} style={{ padding: theme.paddings.xl }}>
+          <StyledListItemWrapper onClick={() => setCurrentChatroom(item)}>
+            <List.Item key={item.chatId} style={{ padding: theme.paddings.xl }}>
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar} size="large" />}
                 title={
                   <StyledItemTitle>
-                    {item.name}
+                    {item.receiverName}
                     <StyledBadge
-                      key={item.key}
+                      key={item.chatId}
                       size="default"
-                      count={item.unReadMessageCount}
+                      count={item.unreadMessages}
                     />
                   </StyledItemTitle>
                 }
                 description={
                   <>
                     @{item.seller ? '판매자 ' : '구매자 '}
-                    {item.stuffName}
+                    {item.itemName}
                   </>
                 }
               />
-              <div>{item.lastMessage || ''}</div>
+              <div>{item.lastContent || ''}</div>
             </List.Item>
           </StyledListItemWrapper>
         )}

@@ -4,10 +4,15 @@ import GlobalStyle from 'styles'
 import theme from 'styles/theme'
 import { ThemeProvider } from 'styled-components'
 import UserContext from 'context/user'
+import ChatContext from 'context/chat'
+
 import { loginByToken } from 'api/auth'
 
 const App: React.FC = () => {
   const [user, setUser] = useState<Nullable<User>>(null)
+  const [currentChatroom, setCurrentChatroom] = useState<Nullable<ChatRoom>>(
+    null
+  )
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const mutateUser = (user: User | null) => {
@@ -38,9 +43,11 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <UserContext.Provider value={{ user, isLoggedIn, setUser: mutateUser }}>
-        <ThemeProvider theme={theme}>
-          <RouterWrapper />
-        </ThemeProvider>
+        <ChatContext.Provider value={{ currentChatroom, setCurrentChatroom }}>
+          <ThemeProvider theme={theme}>
+            <RouterWrapper />
+          </ThemeProvider>
+        </ChatContext.Provider>
       </UserContext.Provider>
     </>
   )
