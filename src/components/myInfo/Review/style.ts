@@ -1,45 +1,18 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const StyledContainer = styled.div`
   width: 100%;
 `
-
-interface TitleProps {
-  type: Nullable<'buy' | 'sell'>
-}
-
-export const Title = styled.div<TitleProps>`
+export const Header = styled.div`
   display: flex;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  p {
-    text-align: center;
-  }
-  p:nth-child(2) {
-    margin: ${({ theme }) => ` 0 ${theme.margins.xl}`};
-    width: 5%;
-  }
+  justify-content: space-between;
+`
 
-  p:not(:nth-child(2)) {
-    cursor: pointer;
-    font-weight: 600;
-    width: 3.7rem;
-  }
-
-  ${(props) =>
-    props.type === 'buy'
-      ? css`
-          p:nth-child(1) {
-            font-size: ${({ theme }) => theme.fontSizes.md};
-            color: ${({ theme }) => theme.palette.green.main};
-          }
-        `
-      : css`
-          p:nth-child(3) {
-            font-size: ${({ theme }) => theme.fontSizes.md};
-            color: ${({ theme }) => theme.palette.green.main};
-          }
-        `}
+export const Title = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
+  font-weight: 600;
+  color: ${({ theme }) => theme.palette.grey[6]};
+  line-height: 30px;
 `
 
 export const EmptyBox = styled.div`
