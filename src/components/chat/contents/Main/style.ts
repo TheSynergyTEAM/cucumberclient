@@ -1,5 +1,4 @@
 import { Col, Input } from 'antd'
-import type { SampleMessage } from 'components/chat/hooks/chat'
 import styled, { css } from 'styled-components'
 import bp from 'styles/breakpoints'
 
@@ -166,4 +165,8 @@ export const StyledMessageSuffix = styled.div`
       color: ${(props) => props.theme.palette.green[4]} !important;
     }
   }
+`
+export const StyledFinishMessage = styled.p`
+  line-height: 37px;
+  text-align: center;
 `

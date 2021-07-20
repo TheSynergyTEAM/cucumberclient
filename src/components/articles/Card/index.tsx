@@ -46,7 +46,7 @@ const Card: React.FC<CardProps> = ({ article }) => {
   return (
     <Col span={COLUMN_SIZE}>
       <StyledSpace direction="vertical" style={{ width: '100%' }}>
-        <Link to={`/article/${article.id}`}>
+        <Link to={`/article/${article.id ?? article.itemid}`}>
           <Image
             preview={false}
             src={'/thumbnail/' + article.thumbnailid}

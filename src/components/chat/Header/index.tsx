@@ -1,5 +1,6 @@
 import { Logo } from 'components/Header/style'
-import React from 'react'
+import React, { useContext } from 'react'
+import chatContext from 'context/chat'
 import { useColumnSize } from '../hooks/column-size'
 import {
   StyledChatHeader,
@@ -7,22 +8,26 @@ import {
   StyledHeaderDesc,
   StyledHeaderUser
 } from './style'
+import { Link } from 'react-router-dom'
 
 const ChatHeader: React.FC = () => {
   const { left, center, right } = useColumnSize()
+  const { currentChatroom } = useContext(chatContext)
 
   return (
     <StyledChatHeader align="middle">
       {left ? (
         <StyledChatHeaderItem span={left}>
-          <Logo>오이마켓</Logo>
+          <Logo>
+            <Link to="/">오이마켓</Link>
+          </Logo>
         </StyledChatHeaderItem>
       ) : null}
       <StyledChatHeaderItem span={!left ? 24 : center} $center>
-        <StyledHeaderUser>유진님과의 채팅방</StyledHeaderUser>
-        <StyledHeaderDesc>
-          @판매자 LG 울트라 와이드 모니터 UL37XMCLD
-        </StyledHeaderDesc>
+        <StyledHeaderUser>
+          {currentChatroom?.receiverName}과의 채팅방
+        </StyledHeaderUser>
+        <StyledHeaderDesc>@{currentChatroom?.itemName}</StyledHeaderDesc>
       </StyledChatHeaderItem>
       {right ? (
         <StyledChatHeaderItem span={right}>

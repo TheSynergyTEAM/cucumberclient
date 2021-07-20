@@ -105,6 +105,24 @@ export const getBuyArticles: (
   }
 }
 
+// 특정 사용자와 거래를 완료함
+export const sellArticle: (
+  itemId: number,
+  sellerId: number,
+  buyerId: number
+) => Promise<ChatDetail> = async (itemId, sellerId, buyerId) => {
+  try {
+    const { data: soldData } = await axios.post('/item/sold', {
+      itemId,
+      sellerId,
+      buyerId
+    })
+    return soldData
+  } catch (error) {
+    throw error.response.data
+  }
+}
+
 // 검색한 상품에 대한 정보를 받아옵니다
 export const getSearchArticles: (
   keyword: string

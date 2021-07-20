@@ -21,6 +21,7 @@ export declare global {
     name: string
     city: string
     street1: string
+    street2: string
     birthdate: string
     email: string
     contact: string

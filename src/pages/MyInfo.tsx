@@ -6,11 +6,12 @@ import ListBox from 'components/myInfo/ListBox'
 import EditProfile from 'components/myInfo/EditProfile'
 import Trade from 'components/myInfo/Trade'
 import Like from 'components/myInfo/Like'
+import Review from 'components/myInfo/Review'
 import { Col, Row } from 'antd'
 import userContext from 'context/user'
 
 const MyInfo: React.FC<RouteComponentProps> = () => {
-  const [selected, setSelected] = useState<string>('my') // my, trade, like, chat
+  const [selected, setSelected] = useState<string>('my') // my, trade, like, chat, review
   const { user } = useContext(userContext)
 
   const selectedContent = useCallback(() => {
@@ -21,6 +22,8 @@ const MyInfo: React.FC<RouteComponentProps> = () => {
         return <Trade userId={user?.id} />
       case 'like':
         return <Like />
+      case 'review':
+        return <Review userId={user?.id} />
     }
   }, [selected])
 

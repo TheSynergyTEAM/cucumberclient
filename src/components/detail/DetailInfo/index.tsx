@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   StyledContainer,
   UserInfo,
@@ -8,6 +8,8 @@ import {
   OtherInfo
 } from './style'
 import { Link } from 'react-router-dom'
+import userContext from 'context/user'
+import { postFavourite, deleteFavourite } from 'api/favourite'
 import { Button } from 'antd'
 import { HeartOutlined, HeartFilled, ShareAltOutlined } from '@ant-design/icons'
 
@@ -16,8 +18,8 @@ interface DetailInfoProps {
 }
 
 const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
-  const [like, setLike] = useState<boolean>(true)
-
+  const [like, setLike] = useState<boolean>(false)
+  const { user } = useContext(userContext)
   return (
     <StyledContainer>
       {articleInfo ? (
@@ -51,11 +53,23 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
             </p>
           </OtherInfo>
           <ButtonBox>
-            <Button onClick={() => setLike(!like)} style={{ width: '20%' }}>
+            <Button
+              onClick={() => {
+                setLike(!like)
+                if (user) {
+                  if (like) {
+                    deleteFavourite(articleInfo.itemid, user.id)
+                  } else {
+                    postFavourite(articleInfo.itemid, user.id)
+                  }
+                }
+              }}
+              style={{ width: '20%' }}
+            >
               {like ? (
-                <HeartOutlined />
-              ) : (
                 <HeartFilled style={{ color: 'red' }} />
+              ) : (
+                <HeartOutlined />
               )}
             </Button>
             <Button style={{ width: '20%' }}>

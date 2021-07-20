@@ -1,10 +1,12 @@
 import React from 'react'
 import { StyledContainer, SelectBox, SelectList } from './style'
+import { useHistory } from 'react-router-dom'
 import {
   ShoppingCartOutlined,
   HeartOutlined,
   MessageOutlined,
-  UserOutlined
+  UserOutlined,
+  EditOutlined
 } from '@ant-design/icons'
 
 interface ListBoxProps {
@@ -13,6 +15,7 @@ interface ListBoxProps {
 }
 
 const ListBox: React.FC<ListBoxProps> = ({ selected, handleChange }) => {
+  const history = useHistory()
   return (
     <StyledContainer>
       <SelectBox>
@@ -38,8 +41,15 @@ const ListBox: React.FC<ListBoxProps> = ({ selected, handleChange }) => {
           <p>관심목록</p>
         </SelectList>
         <SelectList
+          isSelected={selected === 'review'}
+          onClick={() => handleChange('review')}
+        >
+          <EditOutlined />
+          <p>리뷰내역</p>
+        </SelectList>
+        <SelectList
           isSelected={selected === 'chat'}
-          onClick={() => handleChange('chat')}
+          onClick={() => history.push('/chat')}
         >
           <MessageOutlined />
           <p>채팅목록</p>

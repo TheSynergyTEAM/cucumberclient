@@ -1,29 +1,43 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import { getChatRoomList } from 'api/chat'
 
-// 테스트
-export interface SampleMessage {
-  // 메세지 내용
-  value: string
-  // 내가 보낸 메세지, 상대가 보낸 메세지, 시스템이 보낸 메세지
-  type: 'me' | 'y' | 'system'
-  // 메세지 생성 시점
-  date: number
-  // 메세지 생성 시점을 보기 편하게 문자열로 변환
-  displayDate?: string
-}
-
-type Message = SampleMessage[] | []
-
-export const useChatMessages = (): {
-  messages: Message
-  setMessages: React.Dispatch<React.SetStateAction<Message>>
+// 채팅방리스트의 내용을 얻어옴
+export const useChatRoom = (): {
+  chatRoom: ChatRoom[]
+  setChatRoom: React.Dispatch<React.SetStateAction<ChatRoom[]>>
+  getChatRoom: (userId: number) => void
+  changeChatRoomInfo: (receiverId: number, changedInfo: ChatRoom) => void
 } => {
-  const [messages, setMessages] = useState<Message>([])
+  const [chatRoom, setChatRoom] = useState<ChatRoom[]>([])
 
-  // @TODO......
+  const getChatRoom = useCallback(async (userId: number) => {
+    const data = await getChatRoomList(userId)
+    if (data.length > 0) {
+      setChatRoom(data)
+    }
+  }, [])
+  console.log(chatRoom)
+
+  // 채팅룸 정보 변경
+  const changeChatRoomInfo = useCallback(
+    (receiverId: number, changedInfo: ChatRoom) => {
+      const plate = chatRoom.map((room) => {
+        console.log(room)
+        if (room.receiverId === receiverId) {
+          return changedInfo
+        }
+        return room
+      })
+      console.log(plate)
+      setChatRoom(plate)
+    },
+    [chatRoom, setChatRoom]
+  )
 
   return {
-    messages,
-    setMessages
+    chatRoom,
+    setChatRoom,
+    getChatRoom,
+    changeChatRoomInfo
   }
 }

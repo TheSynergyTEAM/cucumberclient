@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import userContext from 'context/user'
+import { getFavouriteList } from 'api/favourite'
 import { StyledContainer, Title, EmptyBox } from './style'
 import ArticleBox from 'components/common/ArticleBox'
 
 const Like: React.FC = () => {
-  // 판매, 구매 목록 받아오는 처리가 필요함 > 아직 api없어서 임시로 만들어놓음
-  const [itemList] = useState<ArticleCardData[]>([])
+  const { user } = useContext(userContext)
+  const [itemList, setItemList] = useState<ArticleCardData[]>([])
 
+  const getList = async (userId: number) => {
+    const list = await getFavouriteList(userId)
+    setItemList(list)
+  }
+
+  useEffect(() => {
+    if (user) {
+      getList(user.id)
+    }
+  }, [user])
+  console.log(itemList)
   return (
     <StyledContainer>
       <Title>

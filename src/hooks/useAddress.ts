@@ -22,6 +22,7 @@ export const useAddrCity: (
       try {
         const address = await getParentAddress()
         setParentAddress(address)
+        console.log(address)
       } catch (error) {
         console.log(error)
       }

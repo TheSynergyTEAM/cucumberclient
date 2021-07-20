@@ -2,6 +2,7 @@ export {}
 
 declare global {
   interface ArticleData {
+    itemid: number
     id: number
     member: string
     city: string

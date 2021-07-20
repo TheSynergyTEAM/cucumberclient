@@ -9,7 +9,6 @@ const Review: React.FC<RouteComponentProps<{ id: string }>> = (props) => {
   // 리뷰 작성, 리뷰 조회를 이 컴포넌트에서 처리하기
 
   const [targetArticle, setTargetArticle] = useState<Nullable<ArticleData>>()
-
   const getArticleInfo = async (itemId: string) => {
     const detailInfo = await getArticle(itemId)
     setTargetArticle(detailInfo)

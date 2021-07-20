@@ -52,9 +52,11 @@ export const logout: () => void = () => {
 }
 
 // 회원정보 수정
-export const updateUser: (user: User) => Promise<User> = async (user) => {
+export const updateUser: (editData: User) => Promise<User> = async (
+  editData
+) => {
   try {
-    const { data } = await axios.patch(`/member/${user.id}`)
+    const { data } = await axios.patch(`/member/${editData.id}`, editData)
     return data
   } catch (error) {
     throw error.response.data

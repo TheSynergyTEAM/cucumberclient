@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 // axios를 사용하기 전 인스턴스에 대한 내용을 설정합니다.
 export default function createAxiosInstance(): void {
-  axios.defaults.baseURL = 'http://34.64.89.26:8080'
-
+  // axios.defaults.baseURL = 'http://34.64.89.26:8080'
+  axios.defaults.baseURL = 'http://localhost:8080'
   // 요청 혹은 응답을 가로채서 어떤 행위를 할 수 있는 인터셉터를 정의합니다.
   // 참고: https://xn--xy1bk56a.run/axios/guide/interceptors.html
   axios.interceptors.request.use((value) => {
@@ -14,8 +14,11 @@ export default function createAxiosInstance(): void {
     }
     return value
   })
-  axios.interceptors.response.use((value) => {
+
+  axios.interceptors.response.use((value: AxiosResponse<any>) => {
+    console.log(value)
     if (value.headers.authorization) {
+      console.log(value.headers.authorization)
       localStorage.setItem('token', value.headers.authorization)
       axios.defaults.headers.Authorization = value.headers.authorization
     }
