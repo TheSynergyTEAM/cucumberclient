@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const StyledContainer = styled.div`
   width: 100%;
@@ -71,4 +71,43 @@ export const ButtonBox = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: ${({ theme }) => theme.margins.xl};
+`
+
+interface StatusTagProps {
+  status: '판매중' | '예약중' | '판매완료'
+}
+
+export const StatusTag = styled.div<StatusTagProps>`
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 10px;
+  p {
+    color: white;
+  }
+  ${(props) => {
+    if (props.status === '판매중') {
+      return css`
+         {
+          background-color: ${({ theme }) => theme.palette.green[4]};
+        }
+      `
+    }
+    if (props.status === '예약중') {
+      return css`
+         {
+          background-color: ${({ theme }) => theme.palette.blue[4]};
+        }
+      `
+    }
+    if (props.status === '판매완료') {
+      return css`
+         {
+          background-color: ${({ theme }) => theme.palette.grey[4]};
+        }
+      `
+    }
+  }}
 `

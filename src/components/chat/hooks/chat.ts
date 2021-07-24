@@ -16,13 +16,11 @@ export const useChatRoom = (): {
       setChatRoom(data)
     }
   }, [])
-  console.log(chatRoom)
 
   // 채팅룸 정보 변경
   const changeChatRoomInfo = useCallback(
     (receiverId: number, changedInfo: ChatRoom) => {
       const plate = chatRoom.map((room) => {
-        console.log(room)
         if (room.receiverId === receiverId) {
           return changedInfo
         }

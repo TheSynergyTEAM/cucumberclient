@@ -152,3 +152,20 @@ export const deleteArticle: (
     throw new Error(error)
   }
 }
+
+// 특정 상품을 판매상태를 변경합니다.
+export const changeArticleStatus: (
+  itemId: number,
+  status: string
+) => Promise<any> = async (itemId, status) => {
+  try {
+    const { data } = await axios.post<any, AxiosResponse<any>>('/item/sold', {
+      itemId,
+      status
+    })
+    return data
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  }
+}

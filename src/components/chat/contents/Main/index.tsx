@@ -184,14 +184,11 @@ const ChatMain: React.FC<ChatMainProps> = ({ changeChatRoomInfo }) => {
     onScroll()
   }, [contents])
 
-  console.log(contents)
-
   // 여기까지했음 > 내꺼 상대방꺼 보여주는거 해야됨
   return (
     <StyledChatMain span={center} ref={wrapper}>
       <StyledMessageWrapper ref={target}>
         {contents.map((message: IndividualChat) => {
-          console.log(message)
           if (Number(message.chatId.split('_')[0]) === user?.id) {
             return (
               <StyledMessage key={message.id} type="me">

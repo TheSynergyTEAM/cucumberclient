@@ -5,10 +5,13 @@ import {
   NameBox,
   ArticleDesc,
   ButtonBox,
-  OtherInfo
+  OtherInfo,
+  StatusTag
 } from './style'
+import { Select } from 'antd'
 import { Link } from 'react-router-dom'
 import userContext from 'context/user'
+import { changeArticleStatus } from 'api/article'
 import { postFavourite, deleteFavourite } from 'api/favourite'
 import { Button } from 'antd'
 import { HeartOutlined, HeartFilled, ShareAltOutlined } from '@ant-design/icons'
@@ -18,8 +21,14 @@ interface DetailInfoProps {
 }
 
 const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
-  const [like, setLike] = useState<boolean>(false)
+  const [like, setLike] = useState<boolean>(articleInfo.like)
   const { user } = useContext(userContext)
+  const { Option } = Select
+
+  function handleSelect(value: string) {
+    changeArticleStatus(articleInfo.id, value)
+  }
+
   return (
     <StyledContainer>
       {articleInfo ? (
@@ -35,7 +44,21 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
               </div>
             </NameBox>
             <div>
-              <p>{`🥒`.repeat(5)}</p>
+              {articleInfo.member === user?.name ? (
+                <Select
+                  defaultValue={articleInfo.sold}
+                  style={{ width: 100 }}
+                  onChange={handleSelect}
+                >
+                  <Option value="판매중">판매중</Option>
+                  <Option value="예약중">예약중</Option>
+                  <Option value="판매완료">판매완료</Option>
+                </Select>
+              ) : (
+                <StatusTag status={articleInfo.sold}>
+                  <p>{articleInfo.sold}</p>
+                </StatusTag>
+              )}
             </div>
           </UserInfo>
           <ArticleDesc>
@@ -48,7 +71,7 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
           </ArticleDesc>
           <OtherInfo>
             <p>
-              채팅 {0} 관심 {0} 조회
+              채팅 {0} 관심 {articleInfo.favCnt} 조회
               {articleInfo.views}
             </p>
           </OtherInfo>
@@ -58,9 +81,9 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
                 setLike(!like)
                 if (user) {
                   if (like) {
-                    deleteFavourite(articleInfo.itemid, user.id)
+                    deleteFavourite(articleInfo.id, user.id)
                   } else {
-                    postFavourite(articleInfo.itemid, user.id)
+                    postFavourite(articleInfo.id, user.id)
                   }
                 }
               }}

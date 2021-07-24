@@ -5,7 +5,6 @@ import { HeartFilled, MessageOutlined } from '@ant-design/icons'
 
 const ArticleBox: React.FC<ArticleCardData> = ({
   id,
-  itemid,
   city,
   street,
   title,
@@ -13,7 +12,7 @@ const ArticleBox: React.FC<ArticleCardData> = ({
   thumbnailid
 }) => {
   return (
-    <Link to={`/article/${id ?? itemid}`}>
+    <Link to={`/article/${id}`}>
       <StyledContainer>
         <ImgBox>
           <img src={`/image/${thumbnailid}`} />

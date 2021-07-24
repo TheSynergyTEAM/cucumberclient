@@ -56,8 +56,14 @@ export const SubInfo = styled.div`
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
   `}
+`
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `
 
 export const IconBox = styled.div`
@@ -69,4 +75,44 @@ export const IconBox = styled.div`
     margin-left: 5px;
     color: ${({ theme }) => theme.palette.grey.main};
   }
+`
+
+interface StatusTagProps {
+  status: '판매중' | '예약중' | '판매완료'
+}
+
+export const StatusTag = styled.div<StatusTagProps>`
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 10px;
+  p {
+    color: white;
+    font-size: 0.6rem;
+  }
+  ${(props) => {
+    if (props.status === '판매중') {
+      return css`
+         {
+          background-color: ${({ theme }) => theme.palette.green[4]};
+        }
+      `
+    }
+    if (props.status === '예약중') {
+      return css`
+         {
+          background-color: ${({ theme }) => theme.palette.blue[4]};
+        }
+      `
+    }
+    if (props.status === '판매완료') {
+      return css`
+         {
+          background-color: ${({ theme }) => theme.palette.grey[4]};
+        }
+      `
+    }
+  }}
 `

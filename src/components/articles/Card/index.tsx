@@ -10,7 +10,9 @@ import {
   StyledSpace,
   SubInfo,
   IconBox,
-  Price
+  Price,
+  IconContainer,
+  StatusTag
 } from './style'
 import { HeartOutlined, MessageOutlined } from '@ant-design/icons'
 
@@ -46,7 +48,7 @@ const Card: React.FC<CardProps> = ({ article }) => {
   return (
     <Col span={COLUMN_SIZE}>
       <StyledSpace direction="vertical" style={{ width: '100%' }}>
-        <Link to={`/article/${article.id ?? article.itemid}`}>
+        <Link to={`/article/${article.id}`}>
           <Image
             preview={false}
             src={'/thumbnail/' + article.thumbnailid}
@@ -61,14 +63,19 @@ const Card: React.FC<CardProps> = ({ article }) => {
           <Price>{article.price}원</Price>
           <CardTags tags={tags} />
           <SubInfo>
-            <IconBox>
-              <HeartOutlined style={{ color: '#cdcdcd' }} />
-              <p>{5}</p>
-            </IconBox>
-            <IconBox>
-              <MessageOutlined style={{ color: '#cdcdcd' }} />
-              <p>{5}</p>
-            </IconBox>
+            <StatusTag status={article.sold}>
+              <p>{article.sold}</p>
+            </StatusTag>
+            <IconContainer>
+              <IconBox>
+                <HeartOutlined style={{ color: '#cdcdcd' }} />
+                <p>{5}</p>
+              </IconBox>
+              <IconBox>
+                <MessageOutlined style={{ color: '#cdcdcd' }} />
+                <p>{5}</p>
+              </IconBox>
+            </IconContainer>
           </SubInfo>
         </Bottom>
       </StyledSpace>
