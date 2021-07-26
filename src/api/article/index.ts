@@ -159,7 +159,7 @@ export const changeArticleStatus: (
   status: string
 ) => Promise<any> = async (itemId, status) => {
   try {
-    const { data } = await axios.post<any, AxiosResponse<any>>('/item/sold', {
+    const { data } = await axios.patch<any, AxiosResponse<any>>('/item/change', {
       itemId,
       status
     })
