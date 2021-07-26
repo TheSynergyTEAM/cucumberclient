@@ -6,7 +6,7 @@ export const postFavourite: (
   memberid: number
 ) => Promise<any> = async (itemid, memberid) => {
   try {
-    const { data } = await axios.post('/favourite', {
+    const { data } = await axios.post(`/favourite?user=${memberid}`, {
       itemid,
       memberid
     })

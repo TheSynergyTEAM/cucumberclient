@@ -98,11 +98,13 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ articleInfo }) => {
             <Button style={{ width: '20%' }}>
               <ShareAltOutlined />
             </Button>
-            <Link to="/chat">
-              <Button type="primary" style={{ width: '100%' }}>
-                판매자와 채팅하기
-              </Button>
-            </Link>
+            {articleInfo.member !== user?.name && (
+              <Link to="/chat">
+                <Button type="primary" style={{ width: '100%' }}>
+                  판매자와 채팅하기
+                </Button>
+              </Link>
+            )}
           </ButtonBox>
         </>
       ) : (
